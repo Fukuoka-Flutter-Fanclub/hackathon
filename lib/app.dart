@@ -5,7 +5,7 @@ import 'package:hackathon/provider/router_provider.dart';
 import 'flavors.dart';
 
 class App extends ConsumerWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,20 +22,21 @@ class App extends ConsumerWidget {
   }
 
   Widget _flavorBanner({
-    required Widget child,
     bool show = true,
+    required Widget child,
   }) =>
       show
           ? Banner(
-              child: child,
               location: BannerLocation.topStart,
               message: F.name,
               color: Colors.green.withOpacity(0.6),
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 12.0,
-                  letterSpacing: 1.0),
+                  fontSize: 12,
+                  letterSpacing: 1,
+              ),
               textDirection: TextDirection.ltr,
+              child: child,
             )
           : Container(
               child: child,

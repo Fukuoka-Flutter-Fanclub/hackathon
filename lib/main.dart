@@ -9,7 +9,7 @@ import 'app.dart';
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: '.env');
+  await dotenv.load();
 
   await Supabase.initialize(
     url: SupabaseConfig.url,
