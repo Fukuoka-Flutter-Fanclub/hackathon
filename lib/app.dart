@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon/go_router/router.dart';
+import 'package:hackathon/provider/router_provider.dart';
 
 import 'flavors.dart';
 
@@ -18,9 +18,6 @@ class App extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
-      builder: (BuildContext context, Widget? child) {
-        return _flavorBanner(child: child!);
-      },
     );
   }
 
