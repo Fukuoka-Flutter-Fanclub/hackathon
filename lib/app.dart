@@ -18,6 +18,9 @@ class App extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
+      builder: (BuildContext context, Widget? child) {
+        return _flavorBanner(child: child!);
+      },
     );
   }
 
