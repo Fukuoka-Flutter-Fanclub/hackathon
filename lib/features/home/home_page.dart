@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hackathon/core/extensions/build_context_x.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/flavors.dart';
 
@@ -23,7 +23,10 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                context.goNamed(MyPage.routeName);
+                context.goNamedWithArg(
+                  MyPage.routeName,
+                  arg: const MyPageArg(id: 'id'),
+                );
               },
               child: const Text('Go MyPage'),
             ),
