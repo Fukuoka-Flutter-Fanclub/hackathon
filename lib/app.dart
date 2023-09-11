@@ -31,9 +31,9 @@ class App extends ConsumerWidget {
               message: F.name,
               color: Colors.green.withOpacity(0.6),
               textStyle: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 12,
-                  letterSpacing: 1,
+                fontWeight: FontWeight.w700,
+                fontSize: 12,
+                letterSpacing: 1,
               ),
               textDirection: TextDirection.ltr,
               child: child,
