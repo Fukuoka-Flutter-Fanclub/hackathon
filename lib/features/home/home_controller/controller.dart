@@ -1,10 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/features/home/home_repository/home_repository.dart';
 
-
-
 final homeProvider = Provider(
-      (ref) => HomeController(ref: ref),
+  (ref) => HomeController(ref: ref),
 );
 
 class HomeController {
@@ -13,7 +11,4 @@ class HomeController {
   final Ref ref;
 
   HomeRepository get _repository => ref.read(homeRepositoryProvider);
-
-
-
 }
