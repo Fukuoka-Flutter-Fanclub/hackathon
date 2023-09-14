@@ -32,6 +32,9 @@ android {
             dimension "flavor-type"
             applicationId "com.fffan.hackathon.dev"
             resValue "string", "app_name", "FFFdev"
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': 'com.googleusercontent.apps.1040972633522-dlf026h20c0ksa2ci85c8fochlmjmhgl'
+            ]
         }
         prod {
             dimension "flavor-type"
@@ -83,4 +86,6 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+}
