@@ -28,11 +28,11 @@ class HomePage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // ref.read(authRepositoryProvider).signInByGoogle();
-                context.goNamedWithArg(
-                  MyPage.routeName,
-                  arg: const MyPageArg(id: 'id'),
-                );
+                ref.read(authRepositoryProvider).signInByGoogle();
+                // context.goNamedWithArg(
+                //   MyPage.routeName,
+                //   arg: const MyPageArg(id: 'id'),
+                // );
               },
               child: const Text('Go MyPage'),
             ),

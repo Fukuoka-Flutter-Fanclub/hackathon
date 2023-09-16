@@ -17,54 +17,11 @@ class AuthRepository {
   SecureStorageDatasource get secureStorage =>
       ref.read(secureStorageDatasourceProvider);
 
-  static const _refreshTokenKey = 'google_auth_refresh_token';
-
   Future<bool> signInByGoogle() async {
-    final (idToken, accessToken) = await googleAuth.tokensByGoogleSignIn();
-    if (idToken == null || accessToken == null) {
-      return false;
-    }
-
-    final refreshToken = await supabaseAuth.signInWithGoogle(
-      idToken: idToken,
-      accessToken: accessToken,
-    );
-    if (refreshToken == null) {
-      return false;
-    }
-
-    await secureStorage.write(
-      key: _refreshTokenKey,
-      value: refreshToken,
-    );
-    return true;
-  }
-
-  Future<bool> signInByRefreshToken() async {
-    final refreshToken = await secureStorage.read(key: _refreshTokenKey);
-    if (refreshToken == null) {
-      return false;
-    }
-
-    final (idToken, accessToken) =
-        await googleAuth.idTokenByRefreshToken(refreshToken);
-    if (idToken == null || accessToken == null) {
-      await secureStorage.delete(key: _refreshTokenKey);
-      return false;
-    }
-
-    await supabaseAuth.signInWithGoogle(
-      idToken: idToken,
-      accessToken: accessToken,
-    );
-    return true;
+    return supabaseAuth.signInWithGoogle();
   }
 
   Future<void> signOut() async {
-    await supabaseAuth.signOut(
-      onComplete: () async {
-        await secureStorage.delete(key: _refreshTokenKey);
-      },
-    );
+    await supabaseAuth.signOut();
   }
 }

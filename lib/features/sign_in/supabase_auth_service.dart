@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon/core/configs/google_auth_config.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 final supabaseAuthProvider = Provider((_) => const SupabaseAuthService());
@@ -10,20 +11,21 @@ class SupabaseAuthService {
 
   static final _supabase = supabase.Supabase.instance.client;
 
-  Future<String?> signInWithGoogle({
-    required String idToken,
-    required String accessToken,
-  }) async {
-    final response = await _supabase.auth.signInWithIdToken(
-      provider: supabase.Provider.google,
-      idToken: idToken,
-      accessToken: accessToken,
+  Future<bool> signInWithGoogle() async {
+    final result = await _supabase.auth.signInWithOAuth(
+      supabase.Provider.google,
+      redirectTo: GoogleAuthConfig.redirectURL,
     );
-    return response.session?.refreshToken;
+    return result;
   }
 
-  Future<void> signOut({FutureOr<void> Function()? onComplete}) async {
+  Future<void> signOut({
+    FutureOr<void> Function()? onComplete,
+  }) async {
     await _supabase.auth.signOut();
     await onComplete?.call();
   }
+
+  Stream<supabase.AuthState> authStateChanged() =>
+      _supabase.auth.onAuthStateChange;
 }
