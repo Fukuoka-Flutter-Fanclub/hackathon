@@ -15,31 +15,45 @@ import 'package:hackathon/provider/supabase/supabase_auth_provider.dart';
 final routerProvider = Provider(
   (ref) => GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: LoginPage.routeName,
+    initialLocation: LoginPage.routeFullPath,
     redirect: (context, state) {
       final session = ref.watch(supabaseAuthProvider).authState;
-      if (session != null) {
-        return HomePage.routeName;
+
+      if (session == null) {
+        if (state.fullPath == SignupPage.routeFullPath) {
+          return SignupPage.routeFullPath;
+        } else if (state.fullPath == PasswordResetPage.routeFullPath) {
+          return PasswordResetPage.routeFullPath;
+        }
+        return LoginPage.routeFullPath;
       }
+
       return null;
     },
     refreshListenable:
         ValueNotifier(ref.watch(supabaseAuthProvider).onAuthStateChange),
     routes: [
       GoRoute(
-        path: LoginPage.routeName,
-        name: LoginPage.routeName,
-        builder: (_, __) => const LoginPage(),
-      ),
-      GoRoute(
-        path: SignupPage.routeName,
-        name: SignupPage.routeName,
-        builder: (_, __) => const SignupPage(),
-      ),
-      GoRoute(
-        path: PasswordResetPage.routeName,
-        name: PasswordResetPage.routeName,
-        builder: (_, __) => const PasswordResetPage(),
+        path: '/auth',
+        name: '/auth',
+        builder: (_, __) => const SizedBox.shrink(),
+        routes: [
+          GoRoute(
+            path: LoginPage.routeName,
+            name: LoginPage.routeName,
+            builder: (_, __) => const LoginPage(),
+          ),
+          GoRoute(
+            path: SignupPage.routeName,
+            name: SignupPage.routeName,
+            builder: (_, __) => const SignupPage(),
+          ),
+          GoRoute(
+            path: PasswordResetPage.routeName,
+            name: PasswordResetPage.routeName,
+            builder: (_, __) => const PasswordResetPage(),
+          ),
+        ],
       ),
       GoRoute(
         path: HomePage.routeName,
