@@ -1,51 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon/features/password_reset/password_reset_page_state.dart';
-import 'package:hackathon/features/snack_bar.dart';
 import 'package:hackathon/provider/supabase/supabase_auth_provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sup;
 
-final passwordResetPageViewModel =
-    StateNotifierProvider<PasswordResetPageNotifier, PasswordResetPageState>(
-  PasswordResetPageNotifier.new,
-);
+final passwordResetPageController =
+    Provider((ref) => PasswordResetPageController(ref));
 
-class PasswordResetPageNotifier extends StateNotifier<PasswordResetPageState>
-    with WidgetsBindingObserver {
-  PasswordResetPageNotifier(this._ref)
-      : super(
-          PasswordResetPageState(
-            emailController: TextEditingController(),
-          ),
-        );
+class PasswordResetPageController {
+  PasswordResetPageController(this._ref);
 
   final Ref _ref;
 
-  SupabaseAuthRepository get supabaseAuth => _ref.read(supabaseAuthProvider);
+  SupabaseAuthRepository get _supabaseAuth => _ref.read(supabaseAuthProvider);
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  bool isEmailValid(String email) => email.isNotEmpty || email.contains('@');
 
-  Future<void> submit(BuildContext context) async {
-    if (state.emailController.text.isEmpty ||
-        !state.emailController.text.contains('@')) {
-      showCustomSnackBar(
-        ['email error', '有効なメールアドレスを入力してください'],
-        context,
-      );
-    }
+  Future<String> submit(String email) async {
     try {
-      await supabaseAuth.resetPassword(
-        email: state.emailController.text,
+      await _supabaseAuth.resetPassword(
+        email: email,
       );
-    } on AuthException catch (error) {
-      showCustomSnackBar(
-        ['エラー', error.message],
-        context,
-      );
+      return '200';
+    } on sup.AuthException catch (e) {
+      return e.statusCode ?? '500';
     }
   }
 }

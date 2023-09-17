@@ -1,61 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/signup/signup_page_state.dart';
-import 'package:hackathon/features/snack_bar.dart';
 import 'package:hackathon/provider/supabase/supabase_auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sup;
 
-final loginPageProvider =
-    StateNotifierProvider<LoginPageNotifier, SignupPageState>(
-  LoginPageNotifier.new,
-);
+final loginPageController = Provider((ref) => LoginPageController(ref));
 
-class LoginPageNotifier extends StateNotifier<SignupPageState>
-    with WidgetsBindingObserver {
-  LoginPageNotifier(this._ref)
-      : super(
-          SignupPageState(
-            emailController: TextEditingController(),
-            passwordController: TextEditingController(),
-            userNameController: TextEditingController(),
-          ),
-        );
+class LoginPageController {
+  LoginPageController(this._ref);
 
   final Ref _ref;
 
-  SupabaseAuthRepository get supabaseAuth => _ref.read(supabaseAuthProvider);
+  SupabaseAuthRepository get _supabaseAuth => _ref.read(supabaseAuthProvider);
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  bool isEmailValid(String email) => email.isNotEmpty || email.contains('@');
 
-  Future<void> changeVisible() async {
-    state = state.copyWith(passwordVisible: !state.passwordVisible);
-  }
+  bool isPasswordValid(String password) => password.length >= 8;
 
-  Future<void> submit(BuildContext context) async {
-    if (!state.emailController.text.contains('@')) {
-      showCustomSnackBar(
-        ['メールアドレス入力エラー', '有効なメールアドレスを入力してください'],
-        context,
+  Future<String> submit({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _supabaseAuth.emailSignin(
+        email: email,
+        password: password,
       );
-    }
-    if (state.passwordController.text.length < 6) {
-      showCustomSnackBar(
-        ['パスワード入力エラー', 'パスワードは6文字以上で入力してください'],
-        context,
-      );
-    } else {
-      final responce = await supabaseAuth.emailSignin(
-        email: state.emailController.text,
-        password: state.passwordController.text,
-      );
-      if (responce.session != null && mounted) {
-        context.go(HomePage.routeName);
-      }
+      return '200';
+    } on sup.AuthException catch (e) {
+      return e.statusCode ?? '500';
     }
   }
 }

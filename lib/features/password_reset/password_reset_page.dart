@@ -3,23 +3,55 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/features/login/login_page.dart';
 import 'package:hackathon/features/password_reset/password_reset_page_model.dart';
+import 'package:hackathon/features/snack_bar.dart';
 
-class PasswordResetPage extends ConsumerWidget {
+class PasswordResetPage extends ConsumerStatefulWidget {
   const PasswordResetPage({super.key});
-  static String routeName = '/password_reset';
+
+  static String routeName = 'password_reset';
+  static String routeFullPath = '/auth/$routeName';
+  @override
+  ConsumerState<PasswordResetPage> createState() => _PasswordResetPageState();
+}
+
+class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
+  final emailController = TextEditingController();
+
+  Future<void> _sendEmail() async {
+    final controller = ref.watch(passwordResetPageController);
+    if (controller.isEmailValid(emailController.text)) {
+      showCustomSnackBar(
+        ['email error', '有効なメールアドレスを入力してください'],
+        context,
+      );
+    }
+    final status = await controller.submit(emailController.text);
+    if (!mounted) {
+      return;
+    }
+    if (status == '200') {
+      showCustomSnackBar(
+        ['送信完了', 'メールをご確認ください'],
+        context,
+      );
+      context.goNamed(LoginPage.routeName);
+    } else {
+      showCustomSnackBar(
+        ['error', 'エラーが発生しました'],
+        context,
+      );
+    }
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(passwordResetPageViewModel);
-    final notifier = ref.read(passwordResetPageViewModel.notifier);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 400),
-          child: Center(
+        child: Center(
+          child: SizedBox(
+            width: 300,
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
@@ -55,7 +87,7 @@ class PasswordResetPage extends ConsumerWidget {
                   ),
                   height: 50,
                   child: TextFormField(
-                    controller: state.emailController,
+                    controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     decoration: const InputDecoration(
@@ -77,7 +109,7 @@ class PasswordResetPage extends ConsumerWidget {
                     backgroundColor: Colors.blue,
                     shape: const StadiumBorder(),
                   ),
-                  onPressed: () => notifier.submit(context),
+                  onPressed: _sendEmail,
                   child: const Padding(
                     padding: EdgeInsets.all(8),
                     child: Text(
@@ -95,7 +127,7 @@ class PasswordResetPage extends ConsumerWidget {
                   height: 20,
                 ),
                 TextButton(
-                  onPressed: () => context.go(LoginPage.routeName),
+                  onPressed: () => context.goNamed(LoginPage.routeName),
                   child: const Text(
                     '-ログインに戻る-',
                     style: TextStyle(

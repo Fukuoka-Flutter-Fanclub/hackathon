@@ -28,14 +28,10 @@ class SupabaseAuthRepository {
   Future<sup.AuthResponse> createAccount({
     required String email,
     required String password,
-    required String userName,
   }) async {
     final response = await supabase.auth.signUp(
       password: password,
       email: email,
-      data: {
-        'username': userName,
-      },
     );
     return response;
   }

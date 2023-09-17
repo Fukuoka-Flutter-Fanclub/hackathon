@@ -1,26 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
 import 'package:hackathon/features/login/login_page.dart';
 import 'package:hackathon/features/signup/signup_page_view_model.dart';
+import 'package:hackathon/features/snack_bar.dart';
 
-class SignupPage extends ConsumerWidget {
+class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
 
-  static String routeName = '/signup';
+  static String routeName = 'signup';
+  static String routeFullPath = '/auth/$routeName';
+  @override
+  ConsumerState<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends ConsumerState<SignupPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool passwordVisible = false;
+
+  Future<void> _signup() async {
+    final controller = ref.watch(signupPageController);
+    if (controller.isEmailValid(emailController.text)) {
+      showCustomSnackBar(
+        ['email error', '有効なメールアドレスを入力してください'],
+        context,
+      );
+    } else if (controller.isPasswordValid(passwordController.text)) {
+      showCustomSnackBar(
+        ['password error', 'パスワードが短すぎます！'],
+        context,
+      );
+    }
+    final statusCode = await controller.submit(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    if (!mounted) {
+      return;
+    }
+    if (statusCode == '200') {
+      return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return const EmailVerificationDialog();
+        },
+      );
+    } else if (statusCode == '400') {
+      return showCustomSnackBar(
+        ['登録エラー', 'こちらのメールアドレスはすでに登録されています'],
+        context,
+      );
+    } else {
+      return showCustomSnackBar(
+        ['エラー', '予期せぬエラーが発生しました'],
+        context,
+      );
+    }
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(signupPageViewModel);
-    final notifier = ref.read(signupPageViewModel.notifier);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 400),
-          child: Center(
+        child: Center(
+          child: SizedBox(
+            width: 300,
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
@@ -34,44 +83,6 @@ class SignupPage extends ConsumerWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  'ユーザー名',
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6CA8F1),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 6,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  height: 50,
-                  child: TextFormField(
-                    controller: state.userNameController,
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: state.passwordVisible,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'OpenSans',
-                      fontSize: 20,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: 10),
-                      prefixIcon: Icon(
-                        Icons.account_box,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
                 const Text(
                   'メールアドレス',
                 ),
@@ -91,7 +102,7 @@ class SignupPage extends ConsumerWidget {
                   ),
                   height: 50,
                   child: TextFormField(
-                    controller: state.emailController,
+                    controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(
                       color: Colors.white,
@@ -105,7 +116,6 @@ class SignupPage extends ConsumerWidget {
                         Icons.email,
                         color: Colors.white,
                       ),
-                      //hintText: 'widget.hintText',
                     ),
                   ),
                 ),
@@ -131,9 +141,9 @@ class SignupPage extends ConsumerWidget {
                   ),
                   height: 50,
                   child: TextFormField(
-                    controller: state.passwordController,
+                    controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: !state.passwordVisible,
+                    obscureText: passwordVisible,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -141,12 +151,16 @@ class SignupPage extends ConsumerWidget {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Icon(
-                          !state.passwordVisible
+                          !passwordVisible
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: Theme.of(context).primaryColorDark,
                         ),
-                        onPressed: notifier.changeVisible,
+                        onPressed: () {
+                          setState(() {
+                            passwordVisible = !passwordVisible;
+                          });
+                        },
                       ),
                       border: InputBorder.none,
                       contentPadding: const EdgeInsets.only(top: 10),
@@ -169,7 +183,7 @@ class SignupPage extends ConsumerWidget {
                     backgroundColor: Colors.blue,
                     shape: const StadiumBorder(),
                   ),
-                  onPressed: () => notifier.signin(context),
+                  onPressed: _signup,
                   child: const Padding(
                     padding: EdgeInsets.all(8),
                     child: Text(
@@ -187,9 +201,7 @@ class SignupPage extends ConsumerWidget {
                   height: 20,
                 ),
                 TextButton(
-                  onPressed: () {
-                    context.go(LoginPage.routeName);
-                  },
+                  onPressed: () => context.goNamed(LoginPage.routeName),
                   child: const Text(
                     '-ログインに戻る-',
                     style: TextStyle(
