@@ -1,61 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/signup/signup_page_state.dart';
-import 'package:hackathon/features/snack_bar.dart';
 import 'package:hackathon/provider/supabase/supabase_auth_provider.dart';
 
-final loginPageProvider =
-    StateNotifierProvider<LoginPageNotifier, SignupPageState>(
-  LoginPageNotifier.new,
+final authTextEditingControllers = AutoDisposeProvider(
+  (_) => AuthTextEditingControllers.init(),
 );
 
-class LoginPageNotifier extends StateNotifier<SignupPageState>
-    with WidgetsBindingObserver {
-  LoginPageNotifier(this._ref)
-      : super(
-          SignupPageState(
-            emailController: TextEditingController(),
-            passwordController: TextEditingController(),
-            userNameController: TextEditingController(),
-          ),
+final class AuthTextEditingControllers {
+  AuthTextEditingControllers.init()
+      : this._(
+          List.generate(3, (_) => TextEditingController(), growable: false),
         );
+
+  AuthTextEditingControllers._(this.controllers);
+
+  final List<TextEditingController> controllers;
+
+  TextEditingController get email => controllers[0];
+
+  TextEditingController get password => controllers[1];
+
+  TextEditingController get userName => controllers[2];
+
+  void dispose() {
+    for (final controller in controllers) {
+      controller.dispose();
+    }
+  }
+
+  bool get isEmailValid => email.text.contains('@');
+
+  bool get isPasswordValid => password.text.length >= 6;
+}
+
+final epLoginController = Provider(
+  (ref) => EPLoginController(ref),
+);
+
+final class EPLoginController {
+  const EPLoginController(this._ref);
 
   final Ref _ref;
 
-  SupabaseAuthRepository get supabaseAuth => _ref.read(supabaseAuthProvider);
+  SupabaseAuthRepository get _supabaseAuth => _ref.read(supabaseAuthProvider);
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  Future<void> changeVisible() async {
-    state = state.copyWith(passwordVisible: !state.passwordVisible);
-  }
-
-  Future<void> submit(BuildContext context) async {
-    if (!state.emailController.text.contains('@')) {
-      showCustomSnackBar(
-        ['メールアドレス入力エラー', '有効なメールアドレスを入力してください'],
-        context,
-      );
-    }
-    if (state.passwordController.text.length < 6) {
-      showCustomSnackBar(
-        ['パスワード入力エラー', 'パスワードは6文字以上で入力してください'],
-        context,
-      );
-    } else {
-      final responce = await supabaseAuth.emailSignin(
-        email: state.emailController.text,
-        password: state.passwordController.text,
-      );
-      if (responce.session != null && mounted) {
-        context.go(HomePage.routeName);
-      }
-    }
+  Future<bool> emailSignIn({
+    required String email,
+    required String password,
+  }) async {
+    final response = await _supabaseAuth.emailSignin(
+      email: email,
+      password: password,
+    );
+    return response.session != null;
   }
 }

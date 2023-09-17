@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/login/login_page_view_model.dart';
 import 'package:hackathon/features/password_reset/password_reset_page.dart';
 import 'package:hackathon/features/signup/signup_page.dart';
+import 'package:hackathon/features/snack_bar.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
+
   static const routeName = '/login';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(loginPageProvider);
-    final notifier = ref.read(loginPageProvider.notifier);
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  bool isPasswordObscure = true;
+
+  @override
+  void dispose() {
+    super.dispose();
+    ref.read(authTextEditingControllers).dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controllers = ref.watch(authTextEditingControllers);
 
     return Scaffold(
       backgroundColor: Colors.blue,
@@ -56,7 +71,7 @@ class LoginPage extends ConsumerWidget {
                   ),
                   height: 50,
                   child: TextFormField(
-                    controller: state.emailController,
+                    controller: controllers.email,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                     decoration: const InputDecoration(
@@ -94,9 +109,9 @@ class LoginPage extends ConsumerWidget {
                   ),
                   height: 50,
                   child: TextFormField(
-                    controller: state.passwordController,
+                    controller: controllers.password,
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: !state.passwordVisible,
+                    obscureText: isPasswordObscure,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -104,9 +119,9 @@ class LoginPage extends ConsumerWidget {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Icon(
-                          state.passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          isPasswordObscure
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: Theme.of(context).primaryColorDark,
                         ),
                         onPressed: () {},
@@ -140,7 +155,22 @@ class LoginPage extends ConsumerWidget {
                     backgroundColor: Colors.blue,
                     shape: const StadiumBorder(),
                   ),
-                  onPressed: () => notifier.submit(context),
+                  onPressed: () async {
+                    if (!controllers.isEmailValid) {
+                      showCustomSnackBar(
+                        ['メールアドレス入力エラー', '有効なメールアドレスを入力してください'],
+                        context,
+                      );
+                    } else {
+                      final result = await ref.read(epLoginController).emailSignIn(
+                            email: controllers.email.text,
+                            password: controllers.password.text,
+                          );
+                      if (result && context.mounted) {
+                        context.goNamed(HomePage.routeName);
+                      }
+                    }
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8),
                     child: Text(

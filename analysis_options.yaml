@@ -19,6 +19,7 @@ linter:
 analyzer:
   errors:
     sort_pub_dependencies: ignore
+    unnecessary_lambdas: ignore
   exclude:
     - lib/flavors.dart
 # Additional information about this file can be found at

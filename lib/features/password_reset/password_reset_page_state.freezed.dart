@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PasswordResetPageState {
-//NullSafetyのためデフォルト値の指定が必須
   TextEditingController get emailController =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -110,7 +109,6 @@ class _$_PasswordResetPageState implements _PasswordResetPageState {
   const _$_PasswordResetPageState(
       {required this.emailController, this.isLoading = false});
 
-//NullSafetyのためデフォルト値の指定が必須
   @override
   final TextEditingController emailController;
   @override
@@ -149,7 +147,7 @@ abstract class _PasswordResetPageState implements PasswordResetPageState {
       {required final TextEditingController emailController,
       final bool isLoading}) = _$_PasswordResetPageState;
 
-  @override //NullSafetyのためデフォルト値の指定が必須
+  @override
   TextEditingController get emailController;
   @override
   bool get isLoading;
