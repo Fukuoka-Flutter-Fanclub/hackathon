@@ -6,6 +6,10 @@ import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 final supabaseAuthProvider = Provider((_) => const SupabaseAuthService());
 
+final authChangedProvider = StreamProvider((ref) {
+  return ref.watch(supabaseAuthProvider).authStateChanged();
+});
+
 class SupabaseAuthService {
   const SupabaseAuthService();
 

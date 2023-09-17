@@ -4,22 +4,39 @@ import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
+import 'package:hackathon/features/root/root_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
+import 'package:hackathon/features/sign_in/auth_repository.dart';
+import 'package:hackathon/features/sign_in/sign_in_page.dart';
+import 'package:hackathon/features/sign_in/supabase_auth_service.dart';
+
+const authPath = '/auth';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: HomePage.routeName,
+    initialLocation: RootPage.routeName,
     redirect: (context, state) {
       return null;
     },
+    refreshListenable: ValueNotifier(ref.watch(authChangedProvider)),
     routes: [
       GoRoute(
-        path: HomePage.routeName,
-        name: HomePage.routeName,
-        builder: (_, __) => const HomePage(),
+        path: RootPage.routeName,
+        name: RootPage.routeName,
+        builder: (_, __) => const RootPage(),
         routes: [
+          GoRoute(
+            path: SignInPage.routeName,
+            name: SignInPage.routeName,
+            builder: (_, __) => const SignInPage(),
+          ),
+          GoRoute(
+            path: HomePage.routeName,
+            name: HomePage.routeName,
+            builder: (_, __) => const HomePage(),
+          ),
           GoRoute(
             path: MyPage.routeName,
             name: MyPage.routeName,
