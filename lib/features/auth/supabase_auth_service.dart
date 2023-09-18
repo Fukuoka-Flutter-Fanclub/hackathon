@@ -22,21 +22,26 @@ class SupabaseAuthService {
     return response.session?.refreshToken;
   }
 
-  Future<void> emailLogin({
+  Future<supabase.AuthResponse> emailLogin({
     required String email,
     required String password,
   }) async {
-    await _supabase.auth.signInWithPassword(email: email, password: password);
+    final responce = await _supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+    return responce;
   }
 
-  Future<void> emailSignin({
+  Future<supabase.AuthResponse> emailSignin({
     required String email,
     required String password,
   }) async {
-    await _supabase.auth.signUp(
+    final responce = await _supabase.auth.signUp(
       password: password,
       email: email,
     );
+    return responce;
   }
 
   Future<void> resetPassword({

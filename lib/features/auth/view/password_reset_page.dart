@@ -20,12 +20,13 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
   Future<void> _sendEmail() async {
     final authRepository = ref.watch(authRepositoryProvider);
 
-    if (authRepository.isEmailValid(emailController.text)) {
+    if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar.createSnackBar(
           content: 'email error \n 有効なメールアドレスを入力してください',
         ),
       );
+      return;
     }
     final status = await authRepository.resetPassword(emailController.text);
     if (!mounted) {

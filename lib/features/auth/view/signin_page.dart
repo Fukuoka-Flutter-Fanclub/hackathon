@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/auth/auth_repository.dart';
 import 'package:hackathon/features/auth/view/login_page.dart';
-import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
 
 class SigninPage extends ConsumerStatefulWidget {
   const SigninPage({super.key});
@@ -21,39 +20,46 @@ class _SignupPageState extends ConsumerState<SigninPage> {
   bool passwordVisible = false;
 
   Future<void> _signup() async {
-    print('ここまで完了1');
     final authRepository = ref.watch(authRepositoryProvider);
-    print('ここまで完了2');
+
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar.createSnackBar(
           content: 'email error \n 有効なメールアドレスを入力してください',
         ),
       );
+      return;
     } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar.createSnackBar(
           content: 'password errorr \n パスワードが短すぎます！',
         ),
       );
+      return;
     }
-    final statusCode = await authRepository.loginByEmail(
+    final statusCode = await authRepository.signinByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
-    print('ここまで完了３');
+
     if (!mounted) {
       return;
     }
     if (statusCode == '200') {
-      return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return const EmailVerificationDialog();
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomSnackBar.createSnackBar(
+          content: '認証メール送信 \n メールから認証を済ませてください',
+          color: Colors.green,
+        ),
       );
-    } else if (statusCode == '400') {
+    } else if (statusCode == '401') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomSnackBar.createSnackBar(
+          content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
+        ),
+      );
+    }
+    if (statusCode == '422') {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar.createSnackBar(
           content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
@@ -150,7 +156,7 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                   child: TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: passwordVisible,
+                    obscureText: !passwordVisible,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,

@@ -70,11 +70,11 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      await supabaseAuth.emailLogin(
+      final responce = await supabaseAuth.emailLogin(
         email: email,
         password: password,
       );
-      return '200';
+      return responce.session?.user.emailConfirmedAt == null ? '400' : '200';
     } on supabase.AuthException catch (e) {
       return e.statusCode ?? '500';
     }
@@ -85,11 +85,11 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      await supabaseAuth.emailSignin(
+      final responce = await supabaseAuth.emailSignin(
         email: email,
         password: password,
       );
-      return '200';
+      return responce.user != null && responce.session == null ? '401' : '200';
     } on supabase.AuthException catch (e) {
       return e.statusCode ?? '500';
     }

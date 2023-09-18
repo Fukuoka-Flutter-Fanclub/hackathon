@@ -5,7 +5,6 @@ import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/auth/auth_repository.dart';
 import 'package:hackathon/features/auth/view/password_reset_page.dart';
 import 'package:hackathon/features/auth/view/signin_page.dart';
-import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
 import 'package:hackathon/features/home/home_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -25,18 +24,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Future<void> _login() async {
     final authRepository = ref.watch(authRepositoryProvider);
 
-    if (authRepository.isEmailValid(emailController.text)) {
-      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar.createSnackBar(
-        content: 'email error \n 有効なメールアドレスを入力してください',
-      ));
-    } else if (authRepository.isPasswordValid(passwordController.text)) {
+    if (!authRepository.isEmailValid(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomSnackBar.createSnackBar(
+          content: 'email error \n 有効なメールアドレスを入力してください',
+        ),
+      );
+      return;
+    } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar.createSnackBar(
           content: 'password error \n パスワードが短すぎます！',
         ),
       );
+      return;
     }
-    final statusCode = await authRepository.signinByEmail(
+    final statusCode = await authRepository.loginByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
@@ -48,12 +51,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       context.go(HomePage.routeName);
     }
     if (statusCode == '400') {
-      return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return const EmailVerificationDialog();
-        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomSnackBar.createSnackBar(
+          content: '認証エラー \n メールから認証を済ませてください',
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomSnackBar.createSnackBar(
+          content: 'エラー \n 予期せぬエラーが発生しました',
+        ),
       );
     }
   }
