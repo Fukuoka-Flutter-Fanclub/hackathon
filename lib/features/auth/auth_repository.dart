@@ -20,7 +20,7 @@ class AuthRepository {
 
   static const _refreshTokenKey = 'google_auth_refresh_token';
 
-  bool isEmailValid(String email) => email.isNotEmpty && email.contains('@');
+  bool isEmailValid(String email) => email.contains('@');
 
   bool isPasswordValid(String password) => password.length >= 8;
 
