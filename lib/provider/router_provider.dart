@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
-import 'package:hackathon/features/auth/view/login_page.dart';
+import 'package:hackathon/features/auth/view/log_in_page.dart';
 import 'package:hackathon/features/auth/view/password_reset_page.dart';
-import 'package:hackathon/features/auth/view/signin_page.dart';
+import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
@@ -22,12 +22,12 @@ final routerProvider = Provider((ref) {
       final session = supabaseClient.auth.currentSession;
 
       if (session == null) {
-        if (state.fullPath == '/${SigninPage.routeName}') {
-          return HomePage.routeName + SigninPage.routeName;
+        if (state.fullPath == '/${SignInPage.routeName}') {
+          return '/${SignInPage.routeName}';
         } else if (state.fullPath == '/${PasswordResetPage.routeName}') {
           return '/${PasswordResetPage.routeName}';
         }
-        return '/${LoginPage.routeName}';
+        return '/${LogInPage.routeName}';
       }
 
       return null;
@@ -40,14 +40,14 @@ final routerProvider = Provider((ref) {
         builder: (_, __) => const HomePage(),
         routes: [
           GoRoute(
-            path: LoginPage.routeName,
-            name: LoginPage.routeName,
-            builder: (_, __) => const LoginPage(),
+            path: LogInPage.routeName,
+            name: LogInPage.routeName,
+            builder: (_, __) => const LogInPage(),
           ),
           GoRoute(
-            path: SigninPage.routeName,
-            name: SigninPage.routeName,
-            builder: (_, __) => const SigninPage(),
+            path: SignInPage.routeName,
+            name: SignInPage.routeName,
+            builder: (_, __) => const SignInPage(),
           ),
           GoRoute(
             path: PasswordResetPage.routeName,

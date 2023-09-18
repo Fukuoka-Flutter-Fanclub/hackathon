@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/auth/auth_repository.dart';
-import 'package:hackathon/features/auth/view/login_page.dart';
+import 'package:hackathon/features/auth/view/log_in_page.dart';
 
 class PasswordResetPage extends ConsumerStatefulWidget {
   const PasswordResetPage({super.key});
@@ -38,7 +38,7 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
           content: Text('送信完了\n メールをご確認ください'),
         ),
       );
-      context.goNamed(LoginPage.routeName);
+      context.goNamed(LogInPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
@@ -133,7 +133,7 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
                     height: 20,
                   ),
                   TextButton(
-                    onPressed: () => context.goNamed(LoginPage.routeName),
+                    onPressed: () => context.goNamed(LogInPage.routeName),
                     child: const Text(
                       '-ログインに戻る-',
                       style: TextStyle(

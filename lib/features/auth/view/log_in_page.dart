@@ -3,23 +3,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/auth/auth_repository.dart';
-import 'package:hackathon/features/auth/view/login_page.dart';
+import 'package:hackathon/features/auth/view/password_reset_page.dart';
+import 'package:hackathon/features/auth/view/sign_in_page.dart';
+import 'package:hackathon/features/home/home_page.dart';
 
-class SigninPage extends ConsumerStatefulWidget {
-  const SigninPage({super.key});
+class LogInPage extends ConsumerStatefulWidget {
+  const LogInPage({super.key});
 
-  static String routeName = 'signin';
+  static const routeName = 'login';
 
   @override
-  ConsumerState<SigninPage> createState() => _SignupPageState();
+  ConsumerState<LogInPage> createState() => _LogInPageState();
 }
 
-class _SignupPageState extends ConsumerState<SigninPage> {
+class _LogInPageState extends ConsumerState<LogInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool obscureText = true;
 
-  Future<void> _signup() async {
+  Future<void> _logIn() async {
     final authRepository = ref.read(authRepositoryProvider);
 
     if (!authRepository.isEmailValid(emailController.text)) {
@@ -32,46 +34,33 @@ class _SignupPageState extends ConsumerState<SigninPage> {
     } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
-          content: Text('password errorr \n パスワードが短すぎます！'),
+          content: Text('password error \n パスワードが短すぎます！'),
         ),
       );
       return;
     }
-    final statusCode = await authRepository.signInByEmail(
+    final statusCode = await authRepository.logInByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
-
     if (!mounted) {
       return;
     }
+
     if (statusCode == '200') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
-          content: Text('認証メール送信 \n メールから認証を済ませてください'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      context.goNamed(LoginPage.routeName);
+      context.go(HomePage.routeName);
       return;
-    } else if (statusCode == '401') {
+    } else if (statusCode == '400') {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
-          content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
-        ),
-      );
-      return;
-    } else if (statusCode == '422') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
-          content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
+          content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
       return;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
-          content: Text('エラー \n 予期せぬエラーが発生しました'),
+          content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
       return;
@@ -92,14 +81,15 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const Text(
-                    'アカウント作成',
+                    'Flutter Hackathon',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 40,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   const Text(
                     'メールアドレス',
@@ -107,7 +97,6 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Container(
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
@@ -125,11 +114,7 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                     child: TextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OpenSans',
-                        fontSize: 20,
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(top: 50),
@@ -175,9 +160,9 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           icon: Icon(
-                            !obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                            obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Theme.of(context).primaryColorDark,
                           ),
                           onPressed: () {
@@ -195,8 +180,17 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  TextButton(
+                    onPressed: () =>
+                        context.goNamed(PasswordResetPage.routeName),
+                    child: const Text(
+                      'パスワード忘れちゃった？',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 50,
@@ -207,11 +201,11 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                       backgroundColor: Colors.blue,
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: _signup,
+                    onPressed: _logIn,
                     child: const Padding(
                       padding: EdgeInsets.all(8),
                       child: Text(
-                        'さあ、始めよう！',
+                        'LOGIN',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -225,9 +219,9 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                     height: 20,
                   ),
                   TextButton(
-                    onPressed: () => context.goNamed(LoginPage.routeName),
+                    onPressed: () => context.goNamed(SignInPage.routeName),
                     child: const Text(
-                      '-ログインに戻る-',
+                      '-アカウント作成はこちら-',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
