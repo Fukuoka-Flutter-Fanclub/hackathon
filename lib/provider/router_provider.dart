@@ -6,6 +6,7 @@ import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
+import 'package:hackathon/features/time_line/time_line_screen.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
@@ -45,6 +46,11 @@ final routerProvider = Provider(
                 builder: (_, __) => const SampleNextPage(),
               ),
             ],
+          ),
+          GoRoute(
+            path: TimeLineScreen.routeName,
+            name: TimeLineScreen.routeName,
+            builder: (_, __) => const TimeLineScreen(),
           ),
         ],
       ),
