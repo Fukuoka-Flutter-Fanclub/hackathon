@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/features/time_line/widgets/time_line_card.dart';
 
-
 class TimeLineScreen extends ConsumerStatefulWidget {
   const TimeLineScreen({super.key});
 
@@ -12,20 +11,16 @@ class TimeLineScreen extends ConsumerStatefulWidget {
   ConsumerState<TimeLineScreen> createState() => _TimeLineScreenState();
 }
 
-
 class _TimeLineScreenState extends ConsumerState<TimeLineScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {
-        },
+        onPressed: () {},
       ),
       backgroundColor: Colors.white,
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: ListView(
         children: const [
           Column(
@@ -35,6 +30,7 @@ class _TimeLineScreenState extends ConsumerState<TimeLineScreen> {
           ),
         ],
       ),
-    );;
+    );
+    ;
   }
 }

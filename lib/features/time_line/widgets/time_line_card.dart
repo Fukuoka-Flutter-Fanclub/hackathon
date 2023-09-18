@@ -72,8 +72,7 @@ class _TimeLineCardState extends ConsumerState<TimeLineCard> {
                       children: [
                         const Text('30'),
                         IconButton(
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.favorite_outline,
                             size: 20,

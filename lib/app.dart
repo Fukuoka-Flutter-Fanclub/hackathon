@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/provider/router_provider.dart';
 import 'flavors.dart';
 
-
 class App extends ConsumerWidget {
   const App({super.key});
 
