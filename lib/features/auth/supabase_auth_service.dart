@@ -26,22 +26,22 @@ class SupabaseAuthService {
     required String email,
     required String password,
   }) async {
-    final responce = await _supabase.auth.signInWithPassword(
+    final response = await _supabase.auth.signInWithPassword(
       email: email,
       password: password,
     );
-    return responce;
+    return response;
   }
 
   Future<supabase.AuthResponse> emailSignin({
     required String email,
     required String password,
   }) async {
-    final responce = await _supabase.auth.signUp(
+    final response = await _supabase.auth.signUp(
       password: password,
       email: email,
     );
-    return responce;
+    return response;
   }
 
   Future<void> resetPassword({
