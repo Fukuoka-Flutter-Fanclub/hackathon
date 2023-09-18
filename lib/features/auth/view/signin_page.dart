@@ -24,15 +24,15 @@ class _SignupPageState extends ConsumerState<SigninPage> {
 
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'email error \n 有効なメールアドレスを入力してください',
+        const CustomSnackBar(
+          content: Text('email error \n 有効なメールアドレスを入力してください'),
         ),
       );
       return;
     } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'password errorr \n パスワードが短すぎます！',
+        const CustomSnackBar(
+          content: Text('password errorr \n パスワードが短すぎます！'),
         ),
       );
       return;
@@ -47,28 +47,28 @@ class _SignupPageState extends ConsumerState<SigninPage> {
     }
     if (statusCode == '200') {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: '認証メール送信 \n メールから認証を済ませてください',
-          color: Colors.green,
+        const CustomSnackBar(
+          content: Text('認証メール送信 \n メールから認証を済ませてください'),
+          backgroundColor: Colors.green,
         ),
       );
     } else if (statusCode == '401') {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
+        const CustomSnackBar(
+          content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
         ),
       );
     }
     if (statusCode == '422') {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
+        const CustomSnackBar(
+          content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'エラー \n 予期せぬエラーが発生しました',
+        const CustomSnackBar(
+          content: Text('エラー \n 予期せぬエラーが発生しました'),
         ),
       );
     }

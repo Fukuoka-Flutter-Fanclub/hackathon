@@ -26,15 +26,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'email error \n 有効なメールアドレスを入力してください',
+        const CustomSnackBar(
+          content: Text('email error \n 有効なメールアドレスを入力してください'),
         ),
       );
       return;
     } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'password error \n パスワードが短すぎます！',
+        const CustomSnackBar(
+          content: Text('password error \n パスワードが短すぎます！'),
         ),
       );
       return;
@@ -52,14 +52,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     }
     if (statusCode == '400') {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: '認証エラー \n メールから認証を済ませてください',
+        const CustomSnackBar(
+          content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'エラー \n 予期せぬエラーが発生しました',
+        const CustomSnackBar(
+          content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
     }

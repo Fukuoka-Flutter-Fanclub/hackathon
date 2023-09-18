@@ -22,8 +22,8 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
 
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'email error \n 有効なメールアドレスを入力してください',
+        const CustomSnackBar(
+          content: Text('email error \n 有効なメールアドレスを入力してください'),
         ),
       );
       return;
@@ -34,15 +34,15 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
     }
     if (status == '200') {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: '送信完了\n メールをご確認ください',
+        const CustomSnackBar(
+          content: Text('送信完了\n メールをご確認ください'),
         ),
       );
       context.goNamed(LoginPage.routeName);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar.createSnackBar(
-          content: 'error\n エラーが発生しました',
+        const CustomSnackBar(
+          content: Text('error\n エラーが発生しました'),
         ),
       );
     }
