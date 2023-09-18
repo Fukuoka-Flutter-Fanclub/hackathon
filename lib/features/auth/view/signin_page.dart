@@ -9,7 +9,7 @@ import 'package:hackathon/features/email_verification/email_verification_dialog.
 class SigninPage extends ConsumerStatefulWidget {
   const SigninPage({super.key});
 
-  static String routeName = 'signup';
+  static String routeName = 'signin';
 
   @override
   ConsumerState<SigninPage> createState() => _SignupPageState();
@@ -21,24 +21,27 @@ class _SignupPageState extends ConsumerState<SigninPage> {
   bool passwordVisible = false;
 
   Future<void> _signup() async {
+    print('ここまで完了1');
     final authRepository = ref.watch(authRepositoryProvider);
-    if (authRepository.isEmailValid(emailController.text)) {
+    print('ここまで完了2');
+    if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
+        CustomSnackBar.createSnackBar(
           content: 'email error \n 有効なメールアドレスを入力してください',
-        ) as SnackBar,
+        ),
       );
-    } else if (authRepository.isPasswordValid(passwordController.text)) {
+    } else if (!authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
+        CustomSnackBar.createSnackBar(
           content: 'password errorr \n パスワードが短すぎます！',
-        ) as SnackBar,
+        ),
       );
     }
     final statusCode = await authRepository.loginByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
+    print('ここまで完了３');
     if (!mounted) {
       return;
     }
@@ -52,15 +55,15 @@ class _SignupPageState extends ConsumerState<SigninPage> {
       );
     } else if (statusCode == '400') {
       ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
+        CustomSnackBar.createSnackBar(
           content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
-        ) as SnackBar,
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
+        CustomSnackBar.createSnackBar(
           content: 'エラー \n 予期せぬエラーが発生しました',
-        ) as SnackBar,
+        ),
       );
     }
   }

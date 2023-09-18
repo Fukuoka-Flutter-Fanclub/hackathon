@@ -26,16 +26,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final authRepository = ref.watch(authRepositoryProvider);
 
     if (authRepository.isEmailValid(emailController.text)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
-          content: 'email error \n 有効なメールアドレスを入力してください',
-        ) as SnackBar,
-      );
+      ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar.createSnackBar(
+        content: 'email error \n 有効なメールアドレスを入力してください',
+      ));
     } else if (authRepository.isPasswordValid(passwordController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const CustomSnackBar(
+        CustomSnackBar.createSnackBar(
           content: 'password error \n パスワードが短すぎます！',
-        ) as SnackBar,
+        ),
       );
     }
     final statusCode = await authRepository.signinByEmail(

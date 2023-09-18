@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomSnackBar extends StatelessWidget {
-  const CustomSnackBar({
-    required this.content,
-    this.color = Colors.grey,
-    super.key,
-  });
-  final String content;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
+class CustomSnackBar {
+  CustomSnackBar._();
+  static SnackBar createSnackBar({
+    required String content,
+    Color color = Colors.grey,
+  }) {
     return SnackBar(
       backgroundColor: color,
       duration: const Duration(seconds: 2),
