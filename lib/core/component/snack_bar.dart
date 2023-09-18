@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomSnackBar {
-  CustomSnackBar._();
-  static SnackBar createSnackBar({
-    required String content,
-    Color color = Colors.grey,
-  }) {
-    return SnackBar(
-      backgroundColor: color,
-      duration: const Duration(seconds: 2),
-      dismissDirection: DismissDirection.startToEnd,
-      content: Text(content),
-    );
-  }
+class CustomSnackBar extends SnackBar {
+  const CustomSnackBar({
+    super.key,
+    super.backgroundColor = Colors.grey,
+    required super.content,
+    super.duration = const Duration(seconds: 3),
+    super.elevation = 0,
+  });
 }
