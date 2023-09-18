@@ -22,7 +22,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   bool obscureText = false;
 
   Future<void> _login() async {
-    final authRepository = ref.watch(authRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
 
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(

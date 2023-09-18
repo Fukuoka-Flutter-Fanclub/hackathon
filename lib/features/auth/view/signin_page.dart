@@ -20,7 +20,7 @@ class _SignupPageState extends ConsumerState<SigninPage> {
   bool obscureText = false;
 
   Future<void> _signup() async {
-    final authRepository = ref.watch(authRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
 
     if (!authRepository.isEmailValid(emailController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
