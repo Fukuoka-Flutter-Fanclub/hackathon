@@ -52,25 +52,29 @@ class _SignupPageState extends ConsumerState<SigninPage> {
           backgroundColor: Colors.green,
         ),
       );
+      context.goNamed(LoginPage.routeName);
+      return;
     } else if (statusCode == '401') {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
           content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
         ),
       );
-    }
-    if (statusCode == '422') {
+      return;
+    } else if (statusCode == '422') {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
           content: Text('登録エラー \n こちらのメールアドレスはすでに登録されています'),
         ),
       );
+      return;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
           content: Text('エラー \n 予期せぬエラーが発生しました'),
         ),
       );
+      return;
     }
   }
 

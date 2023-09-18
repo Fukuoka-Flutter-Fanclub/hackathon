@@ -49,19 +49,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (statusCode == '200') {
       context.go(HomePage.routeName);
-    }
-    if (statusCode == '400') {
+      return;
+    } else if (statusCode == '400') {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
           content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
+      return;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const CustomSnackBar(
           content: Text('認証エラー \n メールから認証を済ませてください'),
         ),
       );
+      return;
     }
   }
 
