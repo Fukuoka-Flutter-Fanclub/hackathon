@@ -22,6 +22,34 @@ class SupabaseAuthService {
     return response.session?.refreshToken;
   }
 
+  Future<supabase.AuthResponse> logInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    final response = await _supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+    return response;
+  }
+
+  Future<supabase.AuthResponse> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    final response = await _supabase.auth.signUp(
+      password: password,
+      email: email,
+    );
+    return response;
+  }
+
+  Future<void> resetPassword({
+    required String email,
+  }) async {
+    await _supabase.auth.resetPasswordForEmail(email);
+  }
+
   Future<void> signOut({FutureOr<void> Function()? onComplete}) async {
     await _supabase.auth.signOut();
     await onComplete?.call();
