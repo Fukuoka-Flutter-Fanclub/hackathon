@@ -65,12 +65,12 @@ class AuthRepository {
     return true;
   }
 
-  Future<String> loginByEmail({
+  Future<String> logInByEmail({
     required String email,
     required String password,
   }) async {
     try {
-      final response = await supabaseAuth.emailLogin(
+      final response = await supabaseAuth.logInWithEmail(
         email: email,
         password: password,
       );
@@ -80,12 +80,12 @@ class AuthRepository {
     }
   }
 
-  Future<String> signinByEmail({
+  Future<String> signInByEmail({
     required String email,
     required String password,
   }) async {
     try {
-      await supabaseAuth.emailSignin(
+      await supabaseAuth.signInWithEmail(
         email: email,
         password: password,
       );

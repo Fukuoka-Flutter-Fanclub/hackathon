@@ -22,7 +22,7 @@ class SupabaseAuthService {
     return response.session?.refreshToken;
   }
 
-  Future<supabase.AuthResponse> emailLogin({
+  Future<supabase.AuthResponse> logInWithEmail({
     required String email,
     required String password,
   }) async {
@@ -33,7 +33,7 @@ class SupabaseAuthService {
     return response;
   }
 
-  Future<supabase.AuthResponse> emailSignin({
+  Future<supabase.AuthResponse> signInWithEmail({
     required String email,
     required String password,
   }) async {

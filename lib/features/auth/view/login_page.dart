@@ -39,7 +39,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       );
       return;
     }
-    final statusCode = await authRepository.loginByEmail(
+    final statusCode = await authRepository.logInByEmail(
       email: emailController.text,
       password: passwordController.text,
     );

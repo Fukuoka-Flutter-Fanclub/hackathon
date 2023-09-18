@@ -37,7 +37,7 @@ class _SignupPageState extends ConsumerState<SigninPage> {
       );
       return;
     }
-    final statusCode = await authRepository.signinByEmail(
+    final statusCode = await authRepository.signInByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
