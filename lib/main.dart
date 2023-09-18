@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,8 @@ FutureOr<void> main() async {
     url: SupabaseConfig.url,
     anonKey: SupabaseConfig.anonKey,
   );
+
+  OpenAI.apiKey = dotenv.env['AI_APIKEY']!;
 
   runApp(
     const ProviderScope(
