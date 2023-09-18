@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
+import 'package:hackathon/features/auth/auth_repository.dart';
+import 'package:hackathon/features/auth/view/password_reset_page.dart';
+import 'package:hackathon/features/auth/view/signin_page.dart';
 import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
 import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/sign_in/auth_repository.dart';
-import 'package:hackathon/features/sign_in/view/password_reset_page.dart';
-import 'package:hackathon/features/sign_in/view/signin_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});

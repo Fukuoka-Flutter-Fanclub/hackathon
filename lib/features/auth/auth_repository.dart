@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/core/data/secure_storage_datasource.dart';
-import 'package:hackathon/features/sign_in/google_auth_service.dart';
-import 'package:hackathon/features/sign_in/supabase_auth_service.dart';
+import 'package:hackathon/features/auth/google_auth_service.dart';
+import 'package:hackathon/features/auth/supabase_auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(ref: ref));
