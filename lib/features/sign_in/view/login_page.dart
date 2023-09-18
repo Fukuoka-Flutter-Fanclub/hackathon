@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
 import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/login/login_page_view_model.dart';
-import 'package:hackathon/features/password_reset/password_reset_page.dart';
-import 'package:hackathon/features/signup/signup_page.dart';
-import 'package:hackathon/features/snack_bar.dart';
+import 'package:hackathon/features/sign_in/auth_repository.dart';
+import 'package:hackathon/features/sign_in/view/password_reset_page.dart';
+import 'package:hackathon/features/sign_in/view/signin_page.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   static const routeName = 'login';
-  static const routeFullPath = '/auth/$routeName';
+
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
 }
@@ -23,19 +23,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   bool passwordVisible = false;
 
   Future<void> _login() async {
-    final controller = ref.watch(loginPageController);
-    if (controller.isEmailValid(emailController.text)) {
-      showCustomSnackBar(
-        ['email error', '有効なメールアドレスを入力してください'],
-        context,
+    final authRepository = ref.watch(authRepositoryProvider);
+
+    if (authRepository.isEmailValid(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'email error \n 有効なメールアドレスを入力してください',
+        ) as SnackBar,
       );
-    } else if (controller.isPasswordValid(passwordController.text)) {
-      showCustomSnackBar(
-        ['password error', 'パスワードが短すぎます！'],
-        context,
+    } else if (authRepository.isPasswordValid(passwordController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'password error \n パスワードが短すぎます！',
+        ) as SnackBar,
       );
     }
-    final statusCode = await controller.submit(
+    final statusCode = await authRepository.signinByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
@@ -207,7 +210,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   height: 20,
                 ),
                 TextButton(
-                  onPressed: () => context.goNamed(SignupPage.routeName),
+                  onPressed: () => context.goNamed(SigninPage.routeName),
                   child: const Text(
                     '-アカウント作成はこちら-',
                     style: TextStyle(

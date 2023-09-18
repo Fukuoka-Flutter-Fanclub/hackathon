@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hackathon/core/component/snack_bar.dart';
 import 'package:hackathon/features/email_verification/email_verification_dialog.dart';
-import 'package:hackathon/features/login/login_page.dart';
-import 'package:hackathon/features/signup/signup_page_view_model.dart';
-import 'package:hackathon/features/snack_bar.dart';
+import 'package:hackathon/features/sign_in/auth_repository.dart';
+import 'package:hackathon/features/sign_in/view/login_page.dart';
 
-class SignupPage extends ConsumerStatefulWidget {
-  const SignupPage({super.key});
+class SigninPage extends ConsumerStatefulWidget {
+  const SigninPage({super.key});
 
   static String routeName = 'signup';
-  static String routeFullPath = '/auth/$routeName';
+
   @override
-  ConsumerState<SignupPage> createState() => _SignupPageState();
+  ConsumerState<SigninPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends ConsumerState<SignupPage> {
+class _SignupPageState extends ConsumerState<SigninPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool passwordVisible = false;
 
   Future<void> _signup() async {
-    final controller = ref.watch(signupPageController);
-    if (controller.isEmailValid(emailController.text)) {
-      showCustomSnackBar(
-        ['email error', '有効なメールアドレスを入力してください'],
-        context,
+    final authRepository = ref.watch(authRepositoryProvider);
+    if (authRepository.isEmailValid(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'email error \n 有効なメールアドレスを入力してください',
+        ) as SnackBar,
       );
-    } else if (controller.isPasswordValid(passwordController.text)) {
-      showCustomSnackBar(
-        ['password error', 'パスワードが短すぎます！'],
-        context,
+    } else if (authRepository.isPasswordValid(passwordController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'password errorr \n パスワードが短すぎます！',
+        ) as SnackBar,
       );
     }
-    final statusCode = await controller.submit(
+    final statusCode = await authRepository.loginByEmail(
       email: emailController.text,
       password: passwordController.text,
     );
@@ -49,14 +51,16 @@ class _SignupPageState extends ConsumerState<SignupPage> {
         },
       );
     } else if (statusCode == '400') {
-      return showCustomSnackBar(
-        ['登録エラー', 'こちらのメールアドレスはすでに登録されています'],
-        context,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: '登録エラー \n こちらのメールアドレスはすでに登録されています',
+        ) as SnackBar,
       );
     } else {
-      return showCustomSnackBar(
-        ['エラー', '予期せぬエラーが発生しました'],
-        context,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'エラー \n 予期せぬエラーが発生しました',
+        ) as SnackBar,
       );
     }
   }

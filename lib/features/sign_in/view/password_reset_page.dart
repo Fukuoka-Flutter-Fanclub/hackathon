@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hackathon/features/login/login_page.dart';
-import 'package:hackathon/features/password_reset/password_reset_page_model.dart';
-import 'package:hackathon/features/snack_bar.dart';
+import 'package:hackathon/core/component/snack_bar.dart';
+import 'package:hackathon/features/sign_in/auth_repository.dart';
+import 'package:hackathon/features/sign_in/view/login_page.dart';
 
 class PasswordResetPage extends ConsumerStatefulWidget {
   const PasswordResetPage({super.key});
 
   static String routeName = 'password_reset';
-  static String routeFullPath = '/auth/$routeName';
+
   @override
   ConsumerState<PasswordResetPage> createState() => _PasswordResetPageState();
 }
@@ -18,27 +18,31 @@ class _PasswordResetPageState extends ConsumerState<PasswordResetPage> {
   final emailController = TextEditingController();
 
   Future<void> _sendEmail() async {
-    final controller = ref.watch(passwordResetPageController);
-    if (controller.isEmailValid(emailController.text)) {
-      showCustomSnackBar(
-        ['email error', '有効なメールアドレスを入力してください'],
-        context,
+    final authRepository = ref.watch(authRepositoryProvider);
+
+    if (authRepository.isEmailValid(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'email error \n 有効なメールアドレスを入力してください',
+        ) as SnackBar,
       );
     }
-    final status = await controller.submit(emailController.text);
+    final status = await authRepository.resetPassword(emailController.text);
     if (!mounted) {
       return;
     }
     if (status == '200') {
-      showCustomSnackBar(
-        ['送信完了', 'メールをご確認ください'],
-        context,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: '送信完了\n メールをご確認ください',
+        ) as SnackBar,
       );
       context.goNamed(LoginPage.routeName);
     } else {
-      showCustomSnackBar(
-        ['error', 'エラーが発生しました'],
-        context,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const CustomSnackBar(
+          content: 'error\n エラーが発生しました',
+        ) as SnackBar,
       );
     }
   }
