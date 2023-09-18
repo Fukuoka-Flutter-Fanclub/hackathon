@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^4.9.1
   flutter_appauth: ^6.0.2
   flutter_secure_storage: ^9.0.0
+  dart_openai: ^4.0.0
 
 dev_dependencies:
   flutter_test:
