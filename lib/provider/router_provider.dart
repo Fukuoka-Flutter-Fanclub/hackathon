@@ -2,41 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
+import 'package:hackathon/features/auth/view/login_page.dart';
+import 'package:hackathon/features/auth/view/password_reset_page.dart';
+import 'package:hackathon/features/auth/view/signin_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/login/login_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
-import 'package:hackathon/features/password_reset/password_reset_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
-import 'package:hackathon/features/signup/signup_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
-import 'package:hackathon/provider/supabase/supabase_auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
-final routerProvider = Provider(
-  (ref) => GoRouter(
+final routerProvider = Provider((ref) {
+  final supabaseClient = supabase.Supabase.instance.client;
+
+  return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: LoginPage.routeFullPath,
+    initialLocation: HomePage.routeName,
     redirect: (context, state) {
-      final session = ref.watch(supabaseAuthProvider).authState;
+      final session = supabaseClient.auth.currentSession;
 
       if (session == null) {
-        if (state.fullPath == SignupPage.routeFullPath) {
-          return SignupPage.routeFullPath;
-        } else if (state.fullPath == PasswordResetPage.routeFullPath) {
-          return PasswordResetPage.routeFullPath;
+        if (state.fullPath == '/${SigninPage.routeName}') {
+          return HomePage.routeName + SigninPage.routeName;
+        } else if (state.fullPath == '/${PasswordResetPage.routeName}') {
+          return '/${PasswordResetPage.routeName}';
         }
-        return LoginPage.routeFullPath;
+        return '/${LoginPage.routeName}';
       }
 
       return null;
     },
-    refreshListenable:
-        ValueNotifier(ref.watch(supabaseAuthProvider).onAuthStateChange),
+    refreshListenable: ValueNotifier(supabaseClient.auth.onAuthStateChange),
     routes: [
       GoRoute(
-        path: '/auth',
-        name: '/auth',
-        builder: (_, __) => const SizedBox.shrink(),
+        path: HomePage.routeName,
+        name: HomePage.routeName,
+        builder: (_, __) => const HomePage(),
         routes: [
           GoRoute(
             path: LoginPage.routeName,
@@ -44,22 +45,15 @@ final routerProvider = Provider(
             builder: (_, __) => const LoginPage(),
           ),
           GoRoute(
-            path: SignupPage.routeName,
-            name: SignupPage.routeName,
-            builder: (_, __) => const SignupPage(),
+            path: SigninPage.routeName,
+            name: SigninPage.routeName,
+            builder: (_, __) => const SigninPage(),
           ),
           GoRoute(
             path: PasswordResetPage.routeName,
             name: PasswordResetPage.routeName,
             builder: (_, __) => const PasswordResetPage(),
           ),
-        ],
-      ),
-      GoRoute(
-        path: HomePage.routeName,
-        name: HomePage.routeName,
-        builder: (_, __) => const HomePage(),
-        routes: [
           GoRoute(
             path: MyPage.routeName,
             name: MyPage.routeName,
@@ -98,5 +92,5 @@ final routerProvider = Provider(
       key: state.pageKey,
       child: Container(),
     ),
-  ),
-);
+  );
+});
