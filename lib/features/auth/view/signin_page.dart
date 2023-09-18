@@ -17,7 +17,7 @@ class SigninPage extends ConsumerStatefulWidget {
 class _SignupPageState extends ConsumerState<SigninPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool obscureText = false;
+  bool obscureText = true;
 
   Future<void> _signup() async {
     final authRepository = ref.read(authRepositoryProvider);
@@ -167,7 +167,7 @@ class _SignupPageState extends ConsumerState<SigninPage> {
                     child: TextFormField(
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText: !obscureText,
+                      obscureText: obscureText,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
