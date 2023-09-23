@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '363379648313',
     projectId: 'fff-hackathon-6a592',
     storageBucket: 'fff-hackathon-6a592.appspot.com',
+    iosClientId: '363379648313-bkcb8obr8ecbgjcifpgai15oiuvl32uc.apps.googleusercontent.com',
     iosBundleId: 'com.fffan.hackathon',
   );
 }

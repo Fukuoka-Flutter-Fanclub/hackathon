@@ -12,7 +12,12 @@
           "package_name": "com.fffan.hackathon.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "363379648313-ioe17b8229nqueidk4p4p1e6atjf0451.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7jYfMQzqkmHy-lIBGgcyUq5Z7bMlb-W8"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363379648313-ioe17b8229nqueidk4p4p1e6atjf0451.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "363379648313-bkcb8obr8ecbgjcifpgai15oiuvl32uc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fffan.hackathon"
+              }
+            }
+          ]
         }
       }
     }
