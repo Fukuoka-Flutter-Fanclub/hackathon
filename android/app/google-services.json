@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "363379648313-55qf29v5b1da5q90r1sof7t9a7hja8ij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fffan.hackathon.dev",
+            "certificate_hash": "0def0ccf9b14dd10eb623fa58e332c36b06ac524"
+          }
+        },
+        {
+          "client_id": "363379648313-nlui9njlonoevmnks3vt3o08a07fnkt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fffan.hackathon.dev",
+            "certificate_hash": "4aa51f9b419723af764fa6e7d2cc813518fb3e41"
+          }
+        },
+        {
           "client_id": "363379648313-ioe17b8229nqueidk4p4p1e6atjf0451.apps.googleusercontent.com",
           "client_type": 3
         }

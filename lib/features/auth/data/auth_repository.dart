@@ -25,6 +25,8 @@ final class AuthRepository {
       idToken: authentication?.idToken,
     );
 
+    print(authentication?.accessToken);
+
     return _firebaseAuth.signInWithCredential(credential);
   }
 

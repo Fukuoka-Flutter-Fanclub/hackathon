@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/extensions/build_context_x.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
+import 'package:hackathon/features/auth/data/google_auth_service.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
 import 'package:hackathon/flavors.dart';
@@ -40,6 +41,7 @@ class HomePage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                // ref.read(googleAuthServiceProvider).signOut();
                 ref.read(authProvider).signInWithGoogle();
                 // context.goNamedWithArg(
                 //   MyPage.routeName,
