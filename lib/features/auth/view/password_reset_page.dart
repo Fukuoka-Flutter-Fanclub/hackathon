@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
-import 'package:hackathon/features/auth/auth_repository.dart';
+import 'package:hackathon/features/auth/supabase_auth_repository.dart';
 import 'package:hackathon/features/auth/view/log_in_page.dart';
 
 class PasswordResetPage extends ConsumerStatefulWidget {
