@@ -31,6 +31,5 @@ class _TimeLineScreenState extends ConsumerState<TimeLineScreen> {
         ],
       ),
     );
-    ;
   }
 }
