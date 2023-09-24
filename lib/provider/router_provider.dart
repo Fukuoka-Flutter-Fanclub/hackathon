@@ -18,21 +18,21 @@ final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
     initialLocation: HomePage.routeName,
-    redirect: (context, state) {
-      final session = supabaseClient.auth.currentSession;
-
-      if (session == null) {
-        if (state.fullPath == '/${SignInPage.routeName}') {
-          return '/${SignInPage.routeName}';
-        } else if (state.fullPath == '/${PasswordResetPage.routeName}') {
-          return '/${PasswordResetPage.routeName}';
-        }
-        return '/${LogInPage.routeName}';
-      }
-
-      return null;
-    },
-    refreshListenable: ValueNotifier(supabaseClient.auth.onAuthStateChange),
+    // redirect: (context, state) {
+    //   final session = supabaseClient.auth.currentSession;
+    //
+    //   if (session == null) {
+    //     if (state.fullPath == '/${SignInPage.routeName}') {
+    //       return '/${SignInPage.routeName}';
+    //     } else if (state.fullPath == '/${PasswordResetPage.routeName}') {
+    //       return '/${PasswordResetPage.routeName}';
+    //     }
+    //     return '/${LogInPage.routeName}';
+    //   }
+    //
+    //   return null;
+    // },
+    // refreshListenable: ValueNotifier(supabaseClient.auth.onAuthStateChange),
     routes: [
       GoRoute(
         path: HomePage.routeName,

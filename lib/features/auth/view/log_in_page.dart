@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
-import 'package:hackathon/features/auth/supabase_auth_repository.dart';
+import 'package:hackathon/features/auth/data/supabase_auth_repository.dart';
 import 'package:hackathon/features/auth/view/password_reset_page.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
