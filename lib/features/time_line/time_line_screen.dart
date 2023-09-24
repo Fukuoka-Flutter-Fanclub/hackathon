@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon/features/time_line/widgets/time_line_card.dart';
+import 'package:hackathon/features/time_line/components/time_line_card.dart';
 
 class TimeLineScreen extends ConsumerStatefulWidget {
   const TimeLineScreen({super.key});
