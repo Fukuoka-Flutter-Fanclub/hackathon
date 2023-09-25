@@ -40,9 +40,8 @@ class HomePage extends ConsumerWidget {
               'Hello ${F.title}',
             ),
             GoogleSignInButton(
-              onPressed: () => ref.read(authProvider).signInWithGoogle(),
+              onPressed: () => ref.read(authProvider).signOut(),
             ),
-
             ElevatedButton(
               onPressed: () {
                 context.goNamedWithArg(

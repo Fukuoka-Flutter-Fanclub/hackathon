@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hackathon/app.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
-import 'package:hackathon/features/auth/view/log_in_page.dart';
-import 'package:hackathon/features/auth/view/password_reset_page.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/init/initial_page.dart';
@@ -17,7 +14,7 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: InitialPage.routeName,
+    initialLocation: '/home',
     redirect: (context, state) async {
       return ref.read(authStateProvider).when(
             data: (data) {
@@ -25,7 +22,7 @@ final routerProvider = Provider((ref) {
                 case null:
                   return '/${SignInPage.routeName}';
                 default:
-                  return '/${HomePage.routeName}';
+                  return null;
               }
             },
             error: (error, _) => '/${SignInPage.routeName}',
@@ -48,11 +45,6 @@ final routerProvider = Provider((ref) {
             path: SignInPage.routeName,
             name: SignInPage.routeName,
             builder: (_, __) => const SignInPage(),
-          ),
-          GoRoute(
-            path: PasswordResetPage.routeName,
-            name: PasswordResetPage.routeName,
-            builder: (_, __) => const PasswordResetPage(),
           ),
           GoRoute(
             path: MyPage.routeName,
