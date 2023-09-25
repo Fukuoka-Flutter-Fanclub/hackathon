@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hackathon/app.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
-import 'package:hackathon/features/auth/view/log_in_page.dart';
 import 'package:hackathon/features/auth/view/password_reset_page.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
@@ -13,6 +11,8 @@ import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
+import 'package:hackathon/features/webRTC/channel_setting_page.dart';
+import 'package:hackathon/features/webRTC/video_page.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
@@ -84,6 +84,20 @@ final routerProvider = Provider((ref) {
             path: TimeLineScreen.routeName,
             name: TimeLineScreen.routeName,
             builder: (_, __) => const TimeLineScreen(),
+          ),
+          GoRoute(
+            path: ChannelSttingPage.routeName,
+            name: ChannelSttingPage.routeName,
+            builder: (_, __) => const ChannelSttingPage(),
+            routes: [
+              GoRoute(
+                path: '${VideoPage.routeName}:channelName',
+                name: VideoPage.routeName,
+                builder: (_, state) => VideoPage(
+                  channelName: state.pathParameters['channelName'] ?? '',
+                ),
+              ),
+            ],
           ),
         ],
       ),
