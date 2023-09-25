@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/component/snack_bar.dart';
-import 'package:hackathon/features/home/home_page.dart';
+import 'package:hackathon/features/webRTC/video_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ChannelSttingPage extends ConsumerStatefulWidget {
@@ -43,7 +43,7 @@ class _ChannelSttingPageState extends ConsumerState<ChannelSttingPage> {
       );
       return;
     }
-    context.goNamed(HomePage.routeName);
+    context.goNamed(VideoPage.routeName);
   }
 
   @override

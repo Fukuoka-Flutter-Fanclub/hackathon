@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$VideoPageState {
-  List<String> get uidList => throw _privateConstructorUsedError;
+  Set<int> get uidList => throw _privateConstructorUsedError;
   bool get isMute => throw _privateConstructorUsedError;
   bool get isCameraOff => throw _privateConstructorUsedError;
 
@@ -31,7 +31,7 @@ abstract class $VideoPageStateCopyWith<$Res> {
           VideoPageState value, $Res Function(VideoPageState) then) =
       _$VideoPageStateCopyWithImpl<$Res, VideoPageState>;
   @useResult
-  $Res call({List<String> uidList, bool isMute, bool isCameraOff});
+  $Res call({Set<int> uidList, bool isMute, bool isCameraOff});
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$VideoPageStateCopyWithImpl<$Res, $Val extends VideoPageState>
       uidList: null == uidList
           ? _value.uidList
           : uidList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Set<int>,
       isMute: null == isMute
           ? _value.isMute
           : isMute // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,7 @@ abstract class _$$_VideoPageStateCopyWith<$Res>
       __$$_VideoPageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> uidList, bool isMute, bool isCameraOff});
+  $Res call({Set<int> uidList, bool isMute, bool isCameraOff});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$_VideoPageStateCopyWithImpl<$Res>
       uidList: null == uidList
           ? _value._uidList
           : uidList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Set<int>,
       isMute: null == isMute
           ? _value.isMute
           : isMute // ignore: cast_nullable_to_non_nullable
@@ -115,18 +115,18 @@ class __$$_VideoPageStateCopyWithImpl<$Res>
 
 class _$_VideoPageState implements _VideoPageState {
   const _$_VideoPageState(
-      {final List<String> uidList = const [],
+      {final Set<int> uidList = const {},
       this.isMute = false,
       this.isCameraOff = false})
       : _uidList = uidList;
 
-  final List<String> _uidList;
+  final Set<int> _uidList;
   @override
   @JsonKey()
-  List<String> get uidList {
-    if (_uidList is EqualUnmodifiableListView) return _uidList;
+  Set<int> get uidList {
+    if (_uidList is EqualUnmodifiableSetView) return _uidList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_uidList);
+    return EqualUnmodifiableSetView(_uidList);
   }
 
   @override
@@ -165,12 +165,12 @@ class _$_VideoPageState implements _VideoPageState {
 
 abstract class _VideoPageState implements VideoPageState {
   const factory _VideoPageState(
-      {final List<String> uidList,
+      {final Set<int> uidList,
       final bool isMute,
       final bool isCameraOff}) = _$_VideoPageState;
 
   @override
-  List<String> get uidList;
+  Set<int> get uidList;
   @override
   bool get isMute;
   @override

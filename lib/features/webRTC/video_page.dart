@@ -4,7 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/features/webRTC/video_page_controller.dart';
 
 class VideoPage extends ConsumerStatefulWidget {
-  const VideoPage({super.key});
+  final String channelName;
+  const VideoPage({
+    required this.channelName,
+    super.key,
+  });
   static const routeName = 'video';
 
   @override
@@ -15,7 +19,9 @@ class _VideoPageState extends ConsumerState<VideoPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(videoPageViewModelProvider.notifier).initAgoraRtcEngine();
+      ref
+          .read(videoPageViewModelProvider.notifier)
+          .initAgoraRtcEngine(widget.channelName);
     });
     super.initState();
   }

@@ -23,12 +23,19 @@ class VideoPageNotifier extends StateNotifier<VideoPageState> {
         dimensions: VideoDimensions(width: 1920, height: 1080),
       );
 
-  Future<void> initAgoraRtcEngine() async {
+  @override
+  void dispose() async {
+    await engine.release();
+    await engine.leaveChannel();
+    super.dispose();
+  }
+
+  Future<void> initAgoraRtcEngine(String channelName) async {
     await engine.initialize(const RtcEngineContext(appId: 'YOUR_APP_ID'));
     await engine.setVideoEncoderConfiguration(configuration);
     await engine.joinChannel(
       token: '',
-      channelId: 'channelName',
+      channelId: channelName,
       uid: 0,
       options: const ChannelMediaOptions(),
     );
@@ -36,20 +43,24 @@ class VideoPageNotifier extends StateNotifier<VideoPageState> {
     await engine.startPreview();
     await engine.enableDualStreamMode(enabled: true);
 
-    engine.registerEventHandler(RtcEngineEventHandler(
-      onError: (err, msg) => print('onError $err $msg'),
-      onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-        print('joinChannelSuccess ');
-      },
-      onUserJoined: (RtcConnection connection, int uid, int elapsed) {
-        print('userJoined $uid $elapsed');
-      },
-      onUserOffline:
-          (RtcConnection connection, int uid, UserOfflineReasonType reason) {
-        print('userOffline $uid $reason');
-      },
-      onLeaveChannel: (connection, stats) => print('leaveChannel '),
-    ));
+    engine.registerEventHandler(
+      RtcEngineEventHandler(
+        onError: (err, msg) => print('onError $err $msg'),
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          print('joinChannelSuccess ');
+        },
+        onUserJoined: (RtcConnection connection, int uid, int elapsed) {
+          state = state.copyWith(uidList: {...state.uidList, uid});
+        },
+        onUserOffline:
+            (RtcConnection connection, int uid, UserOfflineReasonType reason) {
+          state = state.copyWith(
+            uidList: state.uidList.where((element) => element != uid).toSet(),
+          );
+        },
+        onLeaveChannel: (connection, stats) => {dispose()},
+      ),
+    );
   }
 
   Future<void> micMute() async {
