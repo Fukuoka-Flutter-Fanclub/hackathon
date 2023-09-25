@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hackathon/app.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
+import 'package:hackathon/features/auth/data/auth_repository.dart';
 import 'package:hackathon/features/auth/view/log_in_page.dart';
 import 'package:hackathon/features/auth/view/password_reset_page.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
+import 'package:hackathon/features/init/initial_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 final routerProvider = Provider((ref) {
-  final supabaseClient = supabase.Supabase.instance.client;
-
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: HomePage.routeName,
-    // redirect: (context, state) {
-    //   final session = supabaseClient.auth.currentSession;
-    //
-    //   if (session == null) {
-    //     if (state.fullPath == '/${SignInPage.routeName}') {
-    //       return '/${SignInPage.routeName}';
-    //     } else if (state.fullPath == '/${PasswordResetPage.routeName}') {
-    //       return '/${PasswordResetPage.routeName}';
-    //     }
-    //     return '/${LogInPage.routeName}';
-    //   }
-    //
-    //   return null;
-    // },
-    // refreshListenable: ValueNotifier(supabaseClient.auth.onAuthStateChange),
+    initialLocation: InitialPage.routeName,
+    redirect: (context, state) async {
+      return ref.read(authStateProvider).when(
+            data: (data) {
+              switch (data) {
+                case null:
+                  return '/${SignInPage.routeName}';
+                default:
+                  return '/${HomePage.routeName}';
+              }
+            },
+            error: (error, _) => '/${SignInPage.routeName}',
+            loading: () => null,
+          );
+    },
+    refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
       GoRoute(
-        path: HomePage.routeName,
-        name: HomePage.routeName,
-        builder: (_, __) => const HomePage(),
+        path: InitialPage.routeName,
+        name: InitialPage.routeName,
+        builder: (_, __) => const InitialPage(),
         routes: [
           GoRoute(
-            path: LogInPage.routeName,
-            name: LogInPage.routeName,
-            builder: (_, __) => const LogInPage(),
+            path: HomePage.routeName,
+            name: HomePage.routeName,
+            builder: (_, __) => const HomePage(),
           ),
           GoRoute(
             path: SignInPage.routeName,

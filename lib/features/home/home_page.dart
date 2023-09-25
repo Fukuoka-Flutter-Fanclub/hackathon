@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/extensions/build_context_x.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
-import 'package:hackathon/features/auth/data/google_auth_service.dart';
+import 'package:hackathon/features/auth/view/components/google_sign_in_button.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
 import 'package:hackathon/flavors.dart';
@@ -11,7 +11,7 @@ import 'package:hackathon/flavors.dart';
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  static const routeName = '/';
+  static const routeName = 'home';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,14 +39,16 @@ class HomePage extends ConsumerWidget {
             Text(
               'Hello ${F.title}',
             ),
+            GoogleSignInButton(
+              onPressed: () => ref.read(authProvider).signInWithGoogle(),
+            ),
+
             ElevatedButton(
               onPressed: () {
-                // ref.read(googleAuthServiceProvider).signOut();
-                ref.read(authProvider).signInWithGoogle();
-                // context.goNamedWithArg(
-                //   MyPage.routeName,
-                //   arg: const MyPageArg(id: 'id'),
-                // );
+                context.goNamedWithArg(
+                  MyPage.routeName,
+                  arg: const MyPageArg(id: 'id'),
+                );
               },
               child: const Text('Go MyPage'),
             ),
