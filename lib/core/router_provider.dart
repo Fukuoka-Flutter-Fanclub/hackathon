@@ -5,7 +5,6 @@ import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
-import 'package:hackathon/features/init/initial_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
@@ -14,8 +13,9 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/home',
+    initialLocation: HomePage.routeName,
     redirect: (context, state) async {
+      print(state);
       return ref.read(authStateProvider).when(
             data: (data) {
               switch (data) {
@@ -32,15 +32,10 @@ final routerProvider = Provider((ref) {
     refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
       GoRoute(
-        path: InitialPage.routeName,
-        name: InitialPage.routeName,
-        builder: (_, __) => const InitialPage(),
+        path: HomePage.routeName,
+        name: HomePage.routeName,
+        builder: (_, __) => const HomePage(),
         routes: [
-          GoRoute(
-            path: HomePage.routeName,
-            name: HomePage.routeName,
-            builder: (_, __) => const HomePage(),
-          ),
           GoRoute(
             path: SignInPage.routeName,
             name: SignInPage.routeName,

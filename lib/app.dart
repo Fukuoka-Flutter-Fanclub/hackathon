@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon/provider/router_provider.dart';
+import 'package:hackathon/core/router_provider.dart';
 import 'flavors.dart';
 
 class App extends ConsumerWidget {

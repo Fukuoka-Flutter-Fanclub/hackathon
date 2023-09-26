@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hackathon/features/home/home_datasource/home_datasource.dart';
+import 'package:hackathon/features/home/data/home_datasource.dart';
 
 final homeRepositoryProvider = Provider(
   (ref) => HomeRepository(ref: ref),

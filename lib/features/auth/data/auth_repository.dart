@@ -4,8 +4,13 @@ import 'package:hackathon/features/auth/data/google_auth_service.dart';
 
 final authProvider = Provider(AuthRepository.new);
 
-final authStateProvider =
-    StreamProvider((ref) => ref.watch(authProvider).authStateChanged);
+final authStateProvider = StreamProvider(
+  (ref) => ref.watch(authProvider).authStateChanged,
+);
+
+final currentUserProvider = Provider(
+  (ref) => ref.watch(authProvider).currentUser,
+);
 
 final class AuthRepository {
   const AuthRepository(this.ref);
