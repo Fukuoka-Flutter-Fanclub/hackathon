@@ -7,6 +7,7 @@ import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/compass/compass_screen.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
+import 'package:hackathon/features/panorama_sample/panorama_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
@@ -14,7 +15,7 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: CompassScreen.routeName,
+    initialLocation: '/${PanoramaPage.routeName}',
     redirect: (context, state) async {
       // print(state);
       // return ref.read(authStateProvider).when(
@@ -30,13 +31,18 @@ final routerProvider = Provider((ref) {
       //       loading: () => null,
       //     );
     },
-    refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
+    // refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
       GoRoute(
         path: HomePage.routeName,
         name: HomePage.routeName,
         builder: (_, __) => const HomePage(),
         routes: [
+          GoRoute(
+            path: PanoramaPage.routeName,
+            name: PanoramaPage.routeName,
+            builder: (_, __) => const PanoramaPage(),
+          ),
           GoRoute(
             path: SignInPage.routeName,
             name: SignInPage.routeName,
