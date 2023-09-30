@@ -6,6 +6,7 @@ import 'package:hackathon/features/auth/data/auth_repository.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
+import 'package:hackathon/features/panorama/panorama_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
 import 'package:hackathon/features/sample/sample_page.dart';
 import 'package:hackathon/features/time_line/time_line_screen.dart';
@@ -13,7 +14,7 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/${HomePage.routeName}',
+    initialLocation: HomePage.routeName,
     redirect: (context, state) async {
       // print(state);
       // return ref.read(authStateProvider).when(
@@ -71,6 +72,11 @@ final routerProvider = Provider((ref) {
             path: TimeLineScreen.routeName,
             name: TimeLineScreen.routeName,
             builder: (_, __) => const TimeLineScreen(),
+          ),
+          GoRoute(
+            path: PanoramaPage.routeName,
+            name: PanoramaPage.routeName,
+            builder: (_, __) => const PanoramaPage(),
           ),
         ],
       ),
