@@ -25,6 +25,8 @@ dependencies:
   google_sign_in: ^6.1.5
   flutter_native_splash: ^2.3.2
   sensors_plus: ^3.0.3
+  flutter_compass: ^0.8.0
+  geolocator: ^10.1.0
 
 dev_dependencies:
   flutter_test:
