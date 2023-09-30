@@ -16,17 +16,29 @@ class PanoramaPageStateNotifier extends StateNotifier<PanoramaPageState> {
       : super(const PanoramaPageState());
 
   final Ref ref;
+  StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
+  StreamSubscription<CompassEvent>? _compassSubscription;
+
+  @override
+  void dispose() {
+    _accelerometerSubscription?.cancel();
+    _compassSubscription?.cancel();
+    super.dispose();
+  }
 
   Future<void> setPosition() async {
     final imageSize = await getImageSize();
-    accelerometerEvents.listen((AccelerometerEvent event) {
+    await _accelerometerSubscription?.cancel();
+    _accelerometerSubscription =
+        accelerometerEvents.listen((AccelerometerEvent event) {
       final height = imageSize.height;
       final def = height / 20;
       state = state.copyWith(topPosition: -(height + def * (event.z - 10)));
     });
     final width = imageSize.width;
     final defWidth = width / 360;
-    FlutterCompass.events?.listen((event) {
+    await _compassSubscription?.cancel();
+    _compassSubscription = FlutterCompass.events?.listen((event) {
       state = state.copyWith(
           leftPosition: -(width + defWidth * (event.heading ?? 0)));
     });
