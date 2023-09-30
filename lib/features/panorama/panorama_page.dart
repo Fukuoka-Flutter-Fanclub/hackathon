@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/panorama/controller/panorama_page_controller.dart';
 
 class PanoramaPage extends ConsumerStatefulWidget {
@@ -41,28 +39,6 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
                 ),
               ],
             ),
-          ),
-          Positioned(bottom: 0, child: _appbar()),
-        ],
-      ),
-    );
-  }
-
-  Widget _appbar() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 100,
-      color: Colors.white.withOpacity(0.5),
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(
-              Icons.cancel,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              context.goNamed(HomePage.routeName);
-            },
           ),
         ],
       ),
