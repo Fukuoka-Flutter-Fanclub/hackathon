@@ -26,13 +26,18 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
     Future(() async {
       imageSize = await getImageSize();
       setState(() {
-        // print('object');
+        print('object');
       });
 
       accelerometerEvents.listen((AccelerometerEvent event) {
-        final def = (imageSize.height / 20);
+        final height = imageSize.height - MediaQuery.of(context).size.height;
+        final width = imageSize.width;
+
+        final def = height / 20;
         setState(() {
-          topPosition = -(imageSize.height + def * -(event.z + 10));
+          topPosition = -(height + def * (event.z - 10));
+          // leftPosition = -(widget + def * (event.z - 10));
+          //  print(topPosition);
         });
 
         //  print(topPosition);
@@ -66,19 +71,12 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
       ),
       body: Stack(
         children: <Widget>[
-          Positioned(
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 250),
             top: topPosition,
             left: leftPosition,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                setState(() {
-                  leftPosition += details.delta.dx;
-                  topPosition += details.delta.dy;
-                });
-              },
-              child: Image.asset(
-                'assets/images/panorama_sample.jpg',
-              ),
+            child: Image.asset(
+              'assets/images/panorama_sample.jpg',
             ),
           ),
         ],
