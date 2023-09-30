@@ -12,7 +12,7 @@ class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const width = 200.0;
-    const height =  width / ratio;
+    const height = width / ratio;
 
     return InkWell(
       onTap: onPressed,

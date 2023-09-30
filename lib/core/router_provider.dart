@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
+import 'package:hackathon/features/compass/compass_screen.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/my_page/my_page.dart';
 import 'package:hackathon/features/sample/sample_next_page.dart';
@@ -13,21 +14,21 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: HomePage.routeName,
+    initialLocation: CompassScreen.routeName,
     redirect: (context, state) async {
-      print(state);
-      return ref.read(authStateProvider).when(
-            data: (data) {
-              switch (data) {
-                case null:
-                  return '/${SignInPage.routeName}';
-                default:
-                  return null;
-              }
-            },
-            error: (error, _) => '/${SignInPage.routeName}',
-            loading: () => null,
-          );
+      // print(state);
+      // return ref.read(authStateProvider).when(
+      //       data: (data) {
+      //         switch (data) {
+      //           case null:
+      //             return '/${SignInPage.routeName}';
+      //           default:
+      //             return null;
+      //         }
+      //       },
+      //       error: (error, _) => '/${SignInPage.routeName}',
+      //       loading: () => null,
+      //     );
     },
     refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
@@ -71,6 +72,11 @@ final routerProvider = Provider((ref) {
             path: TimeLineScreen.routeName,
             name: TimeLineScreen.routeName,
             builder: (_, __) => const TimeLineScreen(),
+          ),
+          GoRoute(
+            path: CompassScreen.routeName,
+            name: CompassScreen.routeName,
+            builder: (_, __) => const CompassScreen(),
           ),
         ],
       ),

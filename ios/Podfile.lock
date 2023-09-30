@@ -692,6 +692,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
+  - flutter_compass (0.0.1):
+    - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
   - google_sign_in_ios (0.0.1):
@@ -705,6 +707,8 @@ PODS:
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
+  - geolocator_apple (1.2.0):
+    - Flutter
   - GoogleUtilities/Environment (7.11.5):
     - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/Logger (7.11.5):
@@ -811,6 +815,10 @@ DEPENDENCIES:
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - flutter_appauth (from `.symlinks/plugins/flutter_appauth/ios`)
+  - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -856,6 +864,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
+  flutter_appauth:
+    :path: ".symlinks/plugins/flutter_appauth/ios"
+  flutter_compass:
+    :path: ".symlinks/plugins/flutter_compass/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  geolocator_apple:
+    :path: ".symlinks/plugins/geolocator_apple/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
@@ -886,6 +902,10 @@ SPEC CHECKSUMS:
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  flutter_appauth: cf9b928962105b2a64a9802585d1c8adaf3e0f46
+  flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
+  flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
@@ -903,4 +923,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.12.0
