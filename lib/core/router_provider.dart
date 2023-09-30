@@ -14,21 +14,21 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: HomePage.routeName,
+    initialLocation: CompassScreen.routeName,
     redirect: (context, state) async {
-      print(state);
-      return ref.read(authStateProvider).when(
-            data: (data) {
-              switch (data) {
-                case null:
-                  return '/${SignInPage.routeName}';
-                default:
-                  return null;
-              }
-            },
-            error: (error, _) => '/${SignInPage.routeName}',
-            loading: () => null,
-          );
+      // print(state);
+      // return ref.read(authStateProvider).when(
+      //       data: (data) {
+      //         switch (data) {
+      //           case null:
+      //             return '/${SignInPage.routeName}';
+      //           default:
+      //             return null;
+      //         }
+      //       },
+      //       error: (error, _) => '/${SignInPage.routeName}',
+      //       loading: () => null,
+      //     );
     },
     refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
