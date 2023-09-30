@@ -14,7 +14,8 @@ class CompassState with _$CompassState {
   }) = _CompassState;
 }
 
-final compassStateProvider = StateNotifierProvider.autoDispose<CompassStateNotifier, CompassState>(
+final compassStateProvider =
+    StateNotifierProvider.autoDispose<CompassStateNotifier, CompassState>(
   (read) => CompassStateNotifier(ref: read),
 );
 
@@ -24,7 +25,8 @@ class CompassStateNotifier extends StateNotifier<CompassState> {
   final Ref ref;
 
   Future<void> getLocation() async {
-    final position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     state = state.copyWith(latitude: position.latitude);
     state = state.copyWith(longitude: position.longitude);
   }
@@ -38,5 +40,4 @@ class CompassStateNotifier extends StateNotifier<CompassState> {
       });
     }
   }
-
 }
