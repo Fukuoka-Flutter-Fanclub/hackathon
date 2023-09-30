@@ -43,16 +43,16 @@ flavorizr:
       app:
         name: "FFFdev"
       android:
-        applicationId: "com.fffan.hackathon.dev"  
+        applicationId: "com.fffan.hackathon.dev2023"  
       ios:
-        bundleId: "com.fffan.hackathon.dev"
+        bundleId: "com.fffan.hackathon.dev2023"
     prod:
       app:
         name: "FFF"
       android:
-        applicationId: "com.fffan.hackathon"
+        applicationId: "com.fffan.hackathon2023"
       ios:
-        bundleId: "com.fffan.hackathon"
+        bundleId: "com.fffan.hackathon2023"
 
 flutter:
   uses-material-design: true

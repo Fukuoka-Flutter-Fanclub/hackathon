@@ -480,7 +480,7 @@
 			baseConfigurationReference = 19E732720DF10455A889F3B8 /* prodDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -540,7 +540,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -605,14 +605,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -674,7 +674,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67BDDA05C46142FF66D419D4 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-dev";
@@ -683,7 +684,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4791D2E5F273095E9B7BB8 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-dev";
@@ -692,7 +694,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00292ED91D7045D74CB4AB2E /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-dev";
@@ -701,7 +704,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EDC1A2A7D5CA874E5E7C4046 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-prod";
@@ -710,7 +714,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 09BE23B9EA14B257E613C55F /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-prod";
@@ -719,7 +724,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A99ED8F6F6C662CAFA08E44 /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-prod";
@@ -777,7 +783,7 @@
 			baseConfigurationReference = 36A502C8275CB6EA4F15D3E3 /* prodProfile.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -830,7 +836,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -845,7 +851,7 @@
 			baseConfigurationReference = 8E10127D6D4E515D8A1F75D3 /* prodRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -898,7 +904,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -915,7 +921,7 @@
 			baseConfigurationReference = F3AFF5A774069814241E38F0 /* devProfile.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -968,7 +974,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -983,7 +989,7 @@
 			baseConfigurationReference = 26068445051299B2732A2D66 /* devDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1043,7 +1049,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1165,14 +1171,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1188,14 +1194,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				DEVELOPMENT_TEAM = 9FG77PRBPG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon2023;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1208,7 +1214,7 @@
 			baseConfigurationReference = 440CB004F2809C3BFDBD1B36 /* devRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1261,7 +1267,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev2023;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

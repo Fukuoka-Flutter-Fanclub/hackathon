@@ -47,10 +47,46 @@
               "client_type": 3
             },
             {
-              "client_id": "363379648313-bkcb8obr8ecbgjcifpgai15oiuvl32uc.apps.googleusercontent.com",
+              "client_id": "363379648313-8k7s4q95ftr1qn5ft99qtpocl0l87m2j.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.fffan.hackathon"
+                "bundle_id": "com.fffan.hackathon.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363379648313:android:216dc7aec831a1c88f6ae8",
+        "android_client_info": {
+          "package_name": "com.fffan.hackathon.dev2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363379648313-ioe17b8229nqueidk4p4p1e6atjf0451.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7jYfMQzqkmHy-lIBGgcyUq5Z7bMlb-W8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363379648313-ioe17b8229nqueidk4p4p1e6atjf0451.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "363379648313-8k7s4q95ftr1qn5ft99qtpocl0l87m2j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fffan.hackathon.RunnerTests"
               }
             }
           ]

@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD8X_uUfuWGZZ4HJzIz82_aCeL47RzgvSw',
-    appId: '1:363379648313:web:d6de5a9e708133b48f6ae8',
-    messagingSenderId: '363379648313',
-    projectId: 'fff-hackathon-6a592',
-    authDomain: 'fff-hackathon-6a592.firebaseapp.com',
-    storageBucket: 'fff-hackathon-6a592.appspot.com',
-    measurementId: 'G-6844QRE4D4',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC7jYfMQzqkmHy-lIBGgcyUq5Z7bMlb-W8',
-    appId: '1:363379648313:android:b2441a3271941bba8f6ae8',
+    appId: '1:363379648313:android:216dc7aec831a1c88f6ae8',
     messagingSenderId: '363379648313',
     projectId: 'fff-hackathon-6a592',
     storageBucket: 'fff-hackathon-6a592.appspot.com',
@@ -66,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAtHZYzLa2F_kAg0grWYLV8Tw6vLNziJ6c',
-    appId: '1:363379648313:ios:202a54e00f622a998f6ae8',
+    appId: '1:363379648313:ios:3f88ea74278760d28f6ae8',
     messagingSenderId: '363379648313',
     projectId: 'fff-hackathon-6a592',
     storageBucket: 'fff-hackathon-6a592.appspot.com',
     androidClientId: '363379648313-55qf29v5b1da5q90r1sof7t9a7hja8ij.apps.googleusercontent.com',
-    iosClientId: '363379648313-bkcb8obr8ecbgjcifpgai15oiuvl32uc.apps.googleusercontent.com',
-    iosBundleId: 'com.fffan.hackathon',
+    iosClientId: '363379648313-pn5h69n6b4q1srskgab4c47r6c46fil5.apps.googleusercontent.com',
+    iosBundleId: 'com.fffan.hackathon2023',
   );
 }
