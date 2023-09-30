@@ -9,6 +9,7 @@ class OpenApiService {
   final Ref ref;
 
   Future<String> sendMessage(String message, String id) async {
+
     final newUserMessage = OpenAIChatCompletionChoiceMessageModel(
       content: message,
       role: OpenAIChatMessageRole.user,
@@ -27,4 +28,5 @@ class OpenApiService {
 
     return content;
   }
+
 }
