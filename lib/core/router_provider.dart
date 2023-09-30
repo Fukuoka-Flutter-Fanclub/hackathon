@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackathon/core/exceptions/invalid_route_arg_exception.dart';
+import 'package:hackathon/core/gyro_page.dart';
 import 'package:hackathon/features/auth/data/auth_repository.dart';
 import 'package:hackathon/features/auth/view/sign_in_page.dart';
 import 'package:hackathon/features/home/home_page.dart';
@@ -15,46 +16,46 @@ final routerProvider = Provider((ref) {
     debugLogDiagnostics: true,
     initialLocation: HomePage.routeName,
     redirect: (context, state) async {
-      print(state);
-      return ref.read(authStateProvider).when(
-            data: (data) {
-              switch (data) {
-                case null:
-                  return '/${SignInPage.routeName}';
-                default:
-                  return null;
-              }
-            },
-            error: (error, _) => '/${SignInPage.routeName}',
-            loading: () => null,
-          );
+      // print(state);
+      // return ref.read(authStateProvider).when(
+      //       data: (data) {
+      //         switch (data) {
+      //           case null:
+      //             return '/${SignInPage.routeName}';
+      //           default:
+      //             return null;
+      //         }
+      //       },
+      //       error: (error, _) => '/${SignInPage.routeName}',
+      //       loading: () => null,
+      //     );
     },
-    refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
+    // refreshListenable: ValueNotifier(ref.watch(authStateProvider)),
     routes: [
       GoRoute(
         path: HomePage.routeName,
         name: HomePage.routeName,
-        builder: (_, __) => const HomePage(),
+        builder: (_, __) => const GyroPage(),
         routes: [
-          GoRoute(
-            path: SignInPage.routeName,
-            name: SignInPage.routeName,
-            builder: (_, __) => const SignInPage(),
-          ),
-          GoRoute(
-            path: MyPage.routeName,
-            name: MyPage.routeName,
-            builder: (_, state) {
-              final arg = state.extra;
-              if (arg is MyPageArg) {
-                return MyPage(arg);
-              }
-              throw InvalidRouteArgException(
-                routeName: MyPage.routeName,
-                arg: arg,
-              );
-            },
-          ),
+          // GoRoute(
+          //   path: SignInPage.routeName,
+          //   name: SignInPage.routeName,
+          //   builder: (_, __) => const SignInPage(),
+          // ),
+          // GoRoute(
+          //   path: MyPage.routeName,
+          //   name: MyPage.routeName,
+          //   builder: (_, state) {
+          //     final arg = state.extra;
+          //     if (arg is MyPageArg) {
+          //       return MyPage(arg);
+          //     }
+          //     throw InvalidRouteArgException(
+          //       routeName: MyPage.routeName,
+          //       arg: arg,
+          //     );
+          //   },
+          // ),
           GoRoute(
             path: SamplePage.routeName,
             name: SamplePage.routeName,
@@ -72,6 +73,11 @@ final routerProvider = Provider((ref) {
             name: TimeLineScreen.routeName,
             builder: (_, __) => const TimeLineScreen(),
           ),
+          GoRoute(
+            path: GyroPage.routeName,
+            name: GyroPage.routeName,
+            builder: (_, __) => const GyroPage(),
+          )
         ],
       ),
     ],
