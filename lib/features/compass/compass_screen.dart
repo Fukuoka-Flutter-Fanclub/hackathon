@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hackathon/core/hoge/compass_provider.dart';
 import 'package:hackathon/features/compass/controller/compass_controller.dart';
 
 class CompassScreen extends ConsumerStatefulWidget {
@@ -16,14 +17,12 @@ class CompassScreenState extends ConsumerState<CompassScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(compassStateProvider.notifier).getDirection();
     ref.read(compassStateProvider.notifier).getLocation();
   }
 
   @override
   Widget build(BuildContext context) {
     final compassState = ref.watch(compassStateProvider);
-    final direction = compassState.direction;
     final latitude = compassState.latitude;
     final longitude = compassState.longitude;
 
@@ -36,7 +35,10 @@ class CompassScreenState extends ConsumerState<CompassScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('現在の位置: $latitude, $longitude'),
-            Text('方位: $direction°'),
+            ref.watch(compassProvider).maybeWhen(
+                  data: (events) => Text('方位: ${events?.heading}'),
+                  orElse: () => const Text('ないよー'),
+                ),
           ],
         ),
       ),
