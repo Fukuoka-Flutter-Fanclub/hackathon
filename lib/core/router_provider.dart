@@ -16,6 +16,8 @@ final routerProvider = Provider((ref) {
     debugLogDiagnostics: true,
     initialLocation: '/${PanoramaPage.routeName}',
     redirect: (context, state) async {
+      return null;
+    
       // print(state);
       // return ref.read(authStateProvider).when(
       //       data: (data) {

@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
                 const Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8),
                       child: Text(
                         'いつもの場所が',
                         style: TextStyle(

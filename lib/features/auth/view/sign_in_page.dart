@@ -6,7 +6,7 @@ import 'package:hackathon/features/auth/view/components/google_sign_in_button.da
 import 'package:hackathon/features/home/home_page.dart';
 
 class SignInPage extends ConsumerStatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   static const routeName = 'sign_in';
 

@@ -37,7 +37,7 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: CircularProgressIndicator(),
               ),
               Text(
@@ -64,27 +64,27 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
               longitude: state.longitude,
               animSpeed: 0.01,
               sensorControl: SensorControl.Orientation,
-              child: Image.asset(ref.watch(filterProvider).imageRef),
               hotspots: [
                 Hotspot(
-                    latitude: 70.0,
-                    longitude: -90.0,
+                    latitude: 70,
+                    longitude: -90,
                     width: 0.05,
                     height: 0.05,
                     widget: IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.location_pin,
                       ),
                       color: Colors.red,
-                    )),
-              ]),
+                    ),),
+              ],
+              child: Image.asset(ref.watch(filterProvider).imageRef),),
           Positioned(
             top: 50,
             left: 20,
             child: IconButton(
-              iconSize: 40.0,
-              padding: EdgeInsets.all(0.0),
+              iconSize: 40,
+              padding: const EdgeInsets.all(0),
               onPressed: () {
                 context.goNamed(HomePage.routeName);
               },
