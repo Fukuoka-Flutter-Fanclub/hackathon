@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PanoramaPageState {
-  double get topPosition => throw _privateConstructorUsedError;
-  double get leftPosition => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PanoramaPageStateCopyWith<PanoramaPageState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $PanoramaPageStateCopyWith<$Res> {
           PanoramaPageState value, $Res Function(PanoramaPageState) then) =
       _$PanoramaPageStateCopyWithImpl<$Res, PanoramaPageState>;
   @useResult
-  $Res call({double topPosition, double leftPosition});
+  $Res call({double longitude, bool loading});
 }
 
 /// @nodoc
@@ -46,110 +46,108 @@ class _$PanoramaPageStateCopyWithImpl<$Res, $Val extends PanoramaPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topPosition = null,
-    Object? leftPosition = null,
+    Object? longitude = null,
+    Object? loading = null,
   }) {
     return _then(_value.copyWith(
-      topPosition: null == topPosition
-          ? _value.topPosition
-          : topPosition // ignore: cast_nullable_to_non_nullable
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      leftPosition: null == leftPosition
-          ? _value.leftPosition
-          : leftPosition // ignore: cast_nullable_to_non_nullable
-              as double,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PanoramaPageStateCopyWith<$Res>
+abstract class _$$PanoramaPageStateImplCopyWith<$Res>
     implements $PanoramaPageStateCopyWith<$Res> {
-  factory _$$_PanoramaPageStateCopyWith(_$_PanoramaPageState value,
-          $Res Function(_$_PanoramaPageState) then) =
-      __$$_PanoramaPageStateCopyWithImpl<$Res>;
+  factory _$$PanoramaPageStateImplCopyWith(_$PanoramaPageStateImpl value,
+          $Res Function(_$PanoramaPageStateImpl) then) =
+      __$$PanoramaPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double topPosition, double leftPosition});
+  $Res call({double longitude, bool loading});
 }
 
 /// @nodoc
-class __$$_PanoramaPageStateCopyWithImpl<$Res>
-    extends _$PanoramaPageStateCopyWithImpl<$Res, _$_PanoramaPageState>
-    implements _$$_PanoramaPageStateCopyWith<$Res> {
-  __$$_PanoramaPageStateCopyWithImpl(
-      _$_PanoramaPageState _value, $Res Function(_$_PanoramaPageState) _then)
+class __$$PanoramaPageStateImplCopyWithImpl<$Res>
+    extends _$PanoramaPageStateCopyWithImpl<$Res, _$PanoramaPageStateImpl>
+    implements _$$PanoramaPageStateImplCopyWith<$Res> {
+  __$$PanoramaPageStateImplCopyWithImpl(_$PanoramaPageStateImpl _value,
+      $Res Function(_$PanoramaPageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topPosition = null,
-    Object? leftPosition = null,
+    Object? longitude = null,
+    Object? loading = null,
   }) {
-    return _then(_$_PanoramaPageState(
-      topPosition: null == topPosition
-          ? _value.topPosition
-          : topPosition // ignore: cast_nullable_to_non_nullable
+    return _then(_$PanoramaPageStateImpl(
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      leftPosition: null == leftPosition
-          ? _value.leftPosition
-          : leftPosition // ignore: cast_nullable_to_non_nullable
-              as double,
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PanoramaPageState implements _PanoramaPageState {
-  const _$_PanoramaPageState({this.topPosition = 0.0, this.leftPosition = 0.0});
+class _$PanoramaPageStateImpl implements _PanoramaPageState {
+  const _$PanoramaPageStateImpl({this.longitude = 0.0, this.loading = true});
 
   @override
   @JsonKey()
-  final double topPosition;
+  final double longitude;
   @override
   @JsonKey()
-  final double leftPosition;
+  final bool loading;
 
   @override
   String toString() {
-    return 'PanoramaPageState(topPosition: $topPosition, leftPosition: $leftPosition)';
+    return 'PanoramaPageState(longitude: $longitude, loading: $loading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PanoramaPageState &&
-            (identical(other.topPosition, topPosition) ||
-                other.topPosition == topPosition) &&
-            (identical(other.leftPosition, leftPosition) ||
-                other.leftPosition == leftPosition));
+            other is _$PanoramaPageStateImpl &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, topPosition, leftPosition);
+  int get hashCode => Object.hash(runtimeType, longitude, loading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PanoramaPageStateCopyWith<_$_PanoramaPageState> get copyWith =>
-      __$$_PanoramaPageStateCopyWithImpl<_$_PanoramaPageState>(
+  _$$PanoramaPageStateImplCopyWith<_$PanoramaPageStateImpl> get copyWith =>
+      __$$PanoramaPageStateImplCopyWithImpl<_$PanoramaPageStateImpl>(
           this, _$identity);
 }
 
 abstract class _PanoramaPageState implements PanoramaPageState {
   const factory _PanoramaPageState(
-      {final double topPosition,
-      final double leftPosition}) = _$_PanoramaPageState;
+      {final double longitude, final bool loading}) = _$PanoramaPageStateImpl;
 
   @override
-  double get topPosition;
+  double get longitude;
   @override
-  double get leftPosition;
+  bool get loading;
   @override
   @JsonKey(ignore: true)
-  _$$_PanoramaPageStateCopyWith<_$_PanoramaPageState> get copyWith =>
+  _$$PanoramaPageStateImplCopyWith<_$PanoramaPageStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

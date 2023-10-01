@@ -4,7 +4,7 @@ part 'panorama_page_state.freezed.dart';
 @freezed
 class PanoramaPageState with _$PanoramaPageState {
   const factory PanoramaPageState({
-    @Default(0.0) double topPosition,
-    @Default(0.0) double leftPosition,
+    @Default(0.0) double longitude,
+    @Default(true) bool loading,
   }) = _PanoramaPageState;
 }
