@@ -14,7 +14,7 @@ import 'package:hackathon/features/time_line/time_line_screen.dart';
 final routerProvider = Provider((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: HomePage.routeName,
+    initialLocation: '/${PanoramaPage.routeName}',
     redirect: (context, state) async {
       // print(state);
       // return ref.read(authStateProvider).when(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hackathon/features/panorama/controller/panorama_page_controller.dart';
+import 'package:hackathon/features/panorama/wigets/filter_list_bar.dart';
+
+import 'filter_controller/filter_controller.dart';
 
 class PanoramaPage extends ConsumerStatefulWidget {
   const PanoramaPage({super.key});
@@ -21,7 +24,7 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(panoramaPageStateProvider);
-
+    final filter = ref.watch(filterProvider);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -32,13 +35,25 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
             child: Row(
               children: [
                 Image.asset(
-                  'assets/images/panorama_sample.jpg',
+                  '${filter.imageRef}',
                 ),
                 Image.asset(
-                  'assets/images/panorama_sample.jpg',
+                  '${filter.imageRef}',
                 ),
               ],
             ),
+          ),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 500,
+                  bottom: 20,
+                ),
+                child: FilterListBar(),
+              ),
+            ],
           ),
         ],
       ),
