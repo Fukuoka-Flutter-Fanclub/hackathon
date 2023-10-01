@@ -605,14 +605,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -674,7 +674,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67BDDA05C46142FF66D419D4 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-dev";
@@ -683,7 +684,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4791D2E5F273095E9B7BB8 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-dev";
@@ -692,7 +694,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00292ED91D7045D74CB4AB2E /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.dev.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-dev";
@@ -701,7 +704,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EDC1A2A7D5CA874E5E7C4046 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-prod";
@@ -710,7 +714,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 09BE23B9EA14B257E613C55F /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-prod";
@@ -719,7 +724,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A99ED8F6F6C662CAFA08E44 /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-prod";
@@ -1165,14 +1171,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1188,14 +1194,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = KQDWKR9548;
+				DEVELOPMENT_TEAM = TJ87VY5Q8W;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fffan.hackathon.shoryu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
