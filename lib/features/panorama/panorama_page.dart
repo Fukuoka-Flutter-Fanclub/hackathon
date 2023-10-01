@@ -24,7 +24,7 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
     return Scaffold(
       body: Center(
         child: Panorama(
-          animSpeed: 0.1,
+          animSpeed: 0.01,
           sensorControl: SensorControl.Orientation,
           child: Image.asset('assets/images/panorama_sample.jpg'),
         ),
