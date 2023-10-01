@@ -27,6 +27,7 @@ dependencies:
   flutter_compass: ^0.8.0
   geolocator: ^10.1.0
   sensors_plus: ^3.0.3
+  panorama: ^0.4.1
 
 dev_dependencies:
   flutter_test:

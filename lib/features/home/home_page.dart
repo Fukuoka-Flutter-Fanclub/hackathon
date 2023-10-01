@@ -20,9 +20,9 @@ class HomePage extends ConsumerWidget {
                 const Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8),
                       child: Text(
-                        'あなたの好奇心を',
+                        'いつもの場所が',
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -31,7 +31,7 @@ class HomePage extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      '各地の冒険へ',
+                      '未知の旅に',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
