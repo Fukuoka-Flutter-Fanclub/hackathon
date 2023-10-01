@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hackathon/features/home/home_page.dart';
 import 'package:hackathon/features/panorama/controller/panorama_page_controller.dart';
 import 'package:panorama/panorama.dart';
+import 'package:hackathon/features/panorama/wigets/filter_list_bar.dart';
+
+import 'filter_controller/filter_controller.dart';
 
 class PanoramaPage extends ConsumerStatefulWidget {
   const PanoramaPage({super.key});
@@ -61,7 +64,7 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
               longitude: state.longitude,
               animSpeed: 0.01,
               sensorControl: SensorControl.Orientation,
-              child: Image.asset('assets/images/panorama_sample.jpg'),
+              child: Image.asset(ref.watch(filterProvider).imageRef),
               hotspots: [
                 Hotspot(
                     latitude: 70.0,
@@ -87,6 +90,18 @@ class _PanoramaPageState extends ConsumerState<PanoramaPage> {
               },
               icon: const Icon(Icons.cancel),
             ),
+          ),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 500,
+                  bottom: 20,
+                ),
+                child: FilterListBar(),
+              ),
+            ],
           ),
         ],
       ),
